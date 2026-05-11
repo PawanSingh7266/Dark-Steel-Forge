@@ -115,9 +115,9 @@ function Footer() {
         <div>
           <h4 className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-4">Contact</h4>
           <ul className="space-y-2.5 text-sm text-foreground/80">
-            <li className="flex items-start gap-2"><MapPin className="h-4 w-4 mt-0.5 text-primary shrink-0" /> CP Tank, Mumbai, India</li>
-            <li className="flex items-center gap-2"><Phone className="h-4 w-4 text-primary" /> +91 98XXX XXXXX</li>
-            <li className="flex items-center gap-2"><Mail className="h-4 w-4 text-primary" /> info@bhandarimetals.com</li>
+            <li className="flex items-start gap-2"><MapPin className="h-4 w-4 mt-0.5 text-primary shrink-0" /><span>CP Tank, Mumbai, India</span></li>
+            <li className="flex items-center gap-2"><Phone className="h-4 w-4 text-primary" /><span>+91 98XXX XXXXX</span></li>
+            <li className="flex items-center gap-2"><Mail className="h-4 w-4 text-primary" /><span>info@bhandarimetals.com</span></li>
           </ul>
         </div>
       </div>
