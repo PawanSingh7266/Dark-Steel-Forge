@@ -1,5 +1,15 @@
 {
-  "framework": "vite",
   "buildCommand": "vite build",
-  "installCommand": "npm install"
+  "installCommand": "npm install",
+  "outputDirectory": "dist/client",
+  "functions": {
+    "api/index.ts": {
+      "runtime": "@vercel/node@5.1.0",
+      "includeFiles": "dist/server/**"
+    }
+  },
+  "rewrites": [
+    { "source": "/assets/(.*)", "destination": "/assets/$1" },
+    { "source": "/(.*)", "destination": "/api" }
+  ]
 }
