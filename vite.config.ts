@@ -19,7 +19,7 @@ export default defineConfig({
   plugins: [
     tsConfigPaths({ projects: ["./tsconfig.json"] }),
     tailwindcss(),
-    tanstackStart({ target: "vercel", customViteReactPlugin: true }),
+    tanstackStart({ customViteReactPlugin: true }),
     viteReact(),
   ],
 });
