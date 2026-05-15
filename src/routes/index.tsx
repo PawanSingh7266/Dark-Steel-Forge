@@ -33,8 +33,8 @@ function Home() {
       <section className="relative min-h-[92vh] flex items-center overflow-hidden">
         <div className="absolute inset-0">
           <img src={hero} alt="" width={1920} height={1088} className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/30" />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/40" />
+          <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/55 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
         </div>
         <div className="absolute inset-0 grid-bg opacity-20 [mask-image:radial-gradient(ellipse_at_center,black,transparent_70%)]" />
         <Container className="relative z-10">
@@ -106,8 +106,8 @@ function Home() {
               <div className="relative">
                 <div className="absolute -inset-4 bg-gradient-to-tr from-[oklch(0.62_0.14_235)]/20 to-transparent rounded-3xl blur-2xl" />
                 <div className="relative aspect-[4/5] rounded-2xl overflow-hidden glass shadow-elegant">
-                  <img src={infra} alt="Warehouse" loading="lazy" className="w-full h-full object-cover opacity-90" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
+                  <img src={infra} alt="Warehouse" loading="lazy" className="w-full h-full object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/85 via-background/10 to-transparent" />
                   <div className="absolute bottom-0 inset-x-0 p-8">
                     <div className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Est. 1983</div>
                     <div className="font-display text-2xl">A family legacy in metal.</div>
@@ -134,7 +134,7 @@ function Home() {
               <FadeIn key={c.name} delay={i * 0.1}>
                 <Link to="/products" className="group relative block aspect-[4/5] rounded-2xl overflow-hidden glass">
                   <img src={c.img} alt={c.name} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent" />
                   <div className="absolute inset-0 p-7 flex flex-col justify-end">
                     <h3 className="text-2xl font-display font-semibold mb-2">{c.name}</h3>
                     <p className="text-sm text-muted-foreground">{c.desc}</p>
