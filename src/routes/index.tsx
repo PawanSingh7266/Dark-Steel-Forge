@@ -230,7 +230,7 @@ function Home() {
             <FadeIn>
               <Link to="/infrastructure" className="group relative block aspect-[4/3] rounded-2xl overflow-hidden glass">
                 <img src={infra} alt="Infrastructure" loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent" />
                 <div className="absolute inset-0 p-8 md:p-10 flex flex-col justify-end">
                   <Layers className="h-8 w-8 text-primary mb-4" />
                   <h3 className="text-3xl font-display font-semibold">Infrastructure built for scale.</h3>
