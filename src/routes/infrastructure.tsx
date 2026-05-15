@@ -29,7 +29,7 @@ function Infra() {
           <FadeIn>
             <div className="relative aspect-[16/8] rounded-3xl overflow-hidden glass">
               <img src={infra} alt="Warehouse" loading="lazy" className="w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/85 via-background/10 to-transparent" />
               <div className="absolute bottom-0 inset-x-0 p-10 md:p-14">
                 <div className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Mumbai, India</div>
                 <h2 className="text-3xl md:text-5xl font-display font-semibold max-w-2xl">Operations engineered for industrial reliability.</h2>

@@ -34,7 +34,6 @@ function Products() {
                 <div className="group h-full rounded-2xl glass overflow-hidden flex flex-col">
                   <div className="relative aspect-[16/10] overflow-hidden">
                     <img src={p.img} alt={p.name} loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent" />
                   </div>
                   <div className="p-7 flex-1 flex flex-col">
                     <h3 className="text-2xl font-display font-semibold mb-2">{p.name}</h3>
