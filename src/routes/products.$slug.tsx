@@ -1,4 +1,4 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Section, Container, FadeIn, Eyebrow } from "@/components/section";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { ArrowUpRight, ArrowLeft, CheckCircle2, FileText, Ruler, Sparkles, Factory, Phone } from "lucide-react";
@@ -19,11 +19,6 @@ export const Route = createFileRoute("/products/$slug")({
       ],
     };
   },
-  loader: ({ params }) => {
-    const product = getProduct(params.slug);
-    if (!product) throw notFound();
-    return { product };
-  },
   component: ProductPage,
   notFoundComponent: () => (
     <Section>
@@ -38,7 +33,20 @@ export const Route = createFileRoute("/products/$slug")({
 });
 
 function ProductPage() {
-  const { product } = Route.useLoaderData();
+  const { slug } = Route.useParams();
+  const product = getProduct(slug);
+  if (!product) {
+    return (
+      <Section>
+        <Container>
+          <div className="text-center py-20">
+            <h1 className="text-3xl font-display font-semibold mb-4">Product not found</h1>
+            <Link to="/products" className="text-accent underline">Back to catalogue</Link>
+          </div>
+        </Container>
+      </Section>
+    );
+  }
   const related = getRelated(product.related);
 
   return (
