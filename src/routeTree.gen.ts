@@ -18,6 +18,7 @@ import { Route as CertificationsRouteImport } from './routes/certifications'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductsCategoryRouteImport } from './routes/products.$category'
+import { Route as ProductsCategoryProductRouteImport } from './routes/products.$category.$product'
 
 const TechnicalRoute = TechnicalRouteImport.update({
   id: '/technical',
@@ -64,6 +65,11 @@ const ProductsCategoryRoute = ProductsCategoryRouteImport.update({
   path: '/$category',
   getParentRoute: () => ProductsRoute,
 } as any)
+const ProductsCategoryProductRoute = ProductsCategoryProductRouteImport.update({
+  id: '/$product',
+  path: '/$product',
+  getParentRoute: () => ProductsCategoryRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -74,7 +80,8 @@ export interface FileRoutesByFullPath {
   '/infrastructure': typeof InfrastructureRoute
   '/products': typeof ProductsRouteWithChildren
   '/technical': typeof TechnicalRoute
-  '/products/$category': typeof ProductsCategoryRoute
+  '/products/$category': typeof ProductsCategoryRouteWithChildren
+  '/products/$category/$product': typeof ProductsCategoryProductRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -85,7 +92,8 @@ export interface FileRoutesByTo {
   '/infrastructure': typeof InfrastructureRoute
   '/products': typeof ProductsRouteWithChildren
   '/technical': typeof TechnicalRoute
-  '/products/$category': typeof ProductsCategoryRoute
+  '/products/$category': typeof ProductsCategoryRouteWithChildren
+  '/products/$category/$product': typeof ProductsCategoryProductRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -97,7 +105,8 @@ export interface FileRoutesById {
   '/infrastructure': typeof InfrastructureRoute
   '/products': typeof ProductsRouteWithChildren
   '/technical': typeof TechnicalRoute
-  '/products/$category': typeof ProductsCategoryRoute
+  '/products/$category': typeof ProductsCategoryRouteWithChildren
+  '/products/$category/$product': typeof ProductsCategoryProductRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -111,6 +120,7 @@ export interface FileRouteTypes {
     | '/products'
     | '/technical'
     | '/products/$category'
+    | '/products/$category/$product'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -122,6 +132,7 @@ export interface FileRouteTypes {
     | '/products'
     | '/technical'
     | '/products/$category'
+    | '/products/$category/$product'
   id:
     | '__root__'
     | '/'
@@ -133,6 +144,7 @@ export interface FileRouteTypes {
     | '/products'
     | '/technical'
     | '/products/$category'
+    | '/products/$category/$product'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -211,15 +223,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProductsCategoryRouteImport
       parentRoute: typeof ProductsRoute
     }
+    '/products/$category/$product': {
+      id: '/products/$category/$product'
+      path: '/$product'
+      fullPath: '/products/$category/$product'
+      preLoaderRoute: typeof ProductsCategoryProductRouteImport
+      parentRoute: typeof ProductsCategoryRoute
+    }
   }
 }
 
+interface ProductsCategoryRouteChildren {
+  ProductsCategoryProductRoute: typeof ProductsCategoryProductRoute
+}
+
+const ProductsCategoryRouteChildren: ProductsCategoryRouteChildren = {
+  ProductsCategoryProductRoute: ProductsCategoryProductRoute,
+}
+
+const ProductsCategoryRouteWithChildren =
+  ProductsCategoryRoute._addFileChildren(ProductsCategoryRouteChildren)
+
 interface ProductsRouteChildren {
-  ProductsCategoryRoute: typeof ProductsCategoryRoute
+  ProductsCategoryRoute: typeof ProductsCategoryRouteWithChildren
 }
 
 const ProductsRouteChildren: ProductsRouteChildren = {
-  ProductsCategoryRoute: ProductsCategoryRoute,
+  ProductsCategoryRoute: ProductsCategoryRouteWithChildren,
 }
 
 const ProductsRouteWithChildren = ProductsRoute._addFileChildren(
