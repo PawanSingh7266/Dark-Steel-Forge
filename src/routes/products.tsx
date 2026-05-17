@@ -1,16 +1,16 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
-import { PageHero, Section, Container, FadeIn, Eyebrow } from "@/components/section";
-import { ArrowUpRight, Layers, Search } from "lucide-react";
+import { useState, useMemo } from "react";
+import { PageHero, Section, Container, Eyebrow } from "@/components/section";
+import { ArrowUpRight, Search, ChevronRight } from "lucide-react";
 import { PRODUCTS, CATEGORIES } from "@/data/products";
 
 export const Route = createFileRoute("/products")({
   head: () => ({
     meta: [
       { title: "Product Catalogue — Bhandari Metals & Alloys" },
-      { name: "description", content: "Comprehensive stainless steel, alloy steel, nickel alloy, Inconel, Monel, Hastelloy and titanium product catalogue — sheets, coils, plates, pipes, tubes, flanges, fittings and bars." },
+      { name: "description", content: "Industrial catalogue of stainless steel, alloy steel, nickel alloy, Inconel, Monel, Hastelloy and titanium products — sheets, plates, coils, pipes, tubes, flanges, fittings, bars and structural sections." },
       { property: "og:title", content: "Product Catalogue — Bhandari Metals & Alloys" },
-      { property: "og:description", content: "Stainless steel and high-performance alloy products engineered to ASTM, ASME and EN standards." },
+      { property: "og:description", content: "Browse the complete industrial product directory." },
     ],
   }),
   component: Products,
@@ -18,102 +18,102 @@ export const Route = createFileRoute("/products")({
 
 function Products() {
   const [query, setQuery] = useState("");
-  const [activeCat, setActiveCat] = useState<string>("All");
+  const [activeCat, setActiveCat] = useState<string>(CATEGORIES[0]);
 
-  const filtered = PRODUCTS.filter((p) => {
-    const matchCat = activeCat === "All" || p.category === activeCat;
+  const grouped = useMemo(() => {
     const q = query.trim().toLowerCase();
-    const matchQ =
-      !q ||
-      p.name.toLowerCase().includes(q) ||
-      p.tagline.toLowerCase().includes(q) ||
-      p.grades.join(" ").toLowerCase().includes(q);
-    return matchCat && matchQ;
-  });
+    const map = new Map<string, typeof PRODUCTS>();
+    for (const cat of CATEGORIES) map.set(cat, []);
+    for (const p of PRODUCTS) {
+      if (q) {
+        const hit =
+          p.name.toLowerCase().includes(q) ||
+          p.tagline.toLowerCase().includes(q) ||
+          p.grades.join(" ").toLowerCase().includes(q);
+        if (!hit) continue;
+      }
+      map.get(p.category)?.push(p);
+    }
+    return map;
+  }, [query]);
+
+  const visibleCats = query
+    ? CATEGORIES.filter((c) => (grouped.get(c)?.length ?? 0) > 0)
+    : CATEGORIES;
+
+  const activeList = query
+    ? PRODUCTS.filter((p) => {
+        const q = query.trim().toLowerCase();
+        return (
+          p.name.toLowerCase().includes(q) ||
+          p.tagline.toLowerCase().includes(q) ||
+          p.grades.join(" ").toLowerCase().includes(q)
+        );
+      })
+    : grouped.get(activeCat) ?? [];
 
   return (
     <>
       <PageHero
         eyebrow="Product Catalogue"
-        title={<>Engineered metal solutions, <span className="text-gradient-glow">end to end.</span></>}
-        subtitle="From precision slit coils to forged superalloy fittings — every product is sourced, processed and supplied to the world's most demanding industrial standards."
+        title={<>Industrial product <span className="text-gradient-glow">directory.</span></>}
+        subtitle="Browse our complete catalogue of stainless steel, alloy and high-performance metal products. Select any item to view full technical specifications, grades, standards and dimensions."
       />
 
       <Section className="!pt-4">
         <Container>
-          <div className="flex flex-col lg:flex-row lg:items-center gap-4 mb-10">
-            <div className="relative flex-1">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <input
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search by product, grade or application…"
-                className="w-full h-12 pl-11 pr-4 rounded-full bg-card border border-border text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/40"
-              />
-            </div>
-            <div className="flex flex-wrap gap-2">
-              {["All", ...CATEGORIES].map((c) => (
-                <button
-                  key={c}
-                  onClick={() => setActiveCat(c)}
-                  className={`px-4 h-10 rounded-full text-xs font-medium border transition-all ${
-                    activeCat === c
-                      ? "bg-foreground text-background border-foreground"
-                      : "bg-card border-border text-muted-foreground hover:text-foreground hover:border-foreground/30"
-                  }`}
-                >
-                  {c}
-                </button>
-              ))}
-            </div>
+          {/* Search */}
+          <div className="relative mb-8 max-w-xl">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <input
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search the catalogue…"
+              className="w-full h-11 pl-11 pr-4 rounded-full bg-card border border-border text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/40"
+            />
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filtered.map((p, i) => (
-              <FadeIn key={p.slug} delay={(i % 3) * 0.06}>
-                <Link
-                  to="/products/$slug"
-                  params={{ slug: p.slug }}
-                  className="group block h-full rounded-2xl bg-card border border-border overflow-hidden hover:border-foreground/20 shadow-sm hover:shadow-xl transition-all"
-                >
-                  <div className="relative aspect-[4/3] overflow-hidden bg-muted">
-                    <img
-                      src={p.image}
-                      alt={p.name}
-                      loading="lazy"
-                      width={1280}
-                      height={896}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                    <div className="absolute top-4 left-4 px-2.5 py-1 rounded-full text-[10px] uppercase tracking-[0.18em] bg-background/85 backdrop-blur-md border border-border text-foreground">
-                      {p.category}
-                    </div>
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-lg font-display font-semibold mb-1.5 group-hover:text-accent transition-colors">{p.name}</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed mb-4 line-clamp-2">{p.tagline}</p>
-                    <div className="flex flex-wrap gap-1.5 mb-5">
-                      {p.grades.slice(0, 3).map((g) => (
-                        <span key={g} className="text-[10px] tracking-wide px-2 py-1 rounded-md bg-muted text-muted-foreground border border-border">
-                          {g}
-                        </span>
-                      ))}
-                    </div>
-                    <div className="inline-flex items-center gap-2 text-xs font-medium text-accent group-hover:gap-3 transition-all">
-                      View specifications <ArrowUpRight className="h-3.5 w-3.5" />
-                    </div>
-                  </div>
-                </Link>
-              </FadeIn>
-            ))}
-          </div>
+          <div className="grid lg:grid-cols-[280px_1fr] gap-10">
+            {/* Vertical category nav */}
+            <aside className="lg:sticky lg:top-24 self-start">
+              <Eyebrow>Categories</Eyebrow>
+              <nav className="mt-4 flex lg:flex-col flex-wrap gap-1 border-l border-border">
+                {visibleCats.map((c) => {
+                  const count = grouped.get(c)?.length ?? 0;
+                  const isActive = !query && c === activeCat;
+                  return (
+                    <button
+                      key={c}
+                      onClick={() => { setActiveCat(c); setQuery(""); }}
+                      className={`group flex items-center justify-between text-left pl-4 pr-3 py-2.5 -ml-px border-l-2 text-sm transition-colors ${
+                        isActive
+                          ? "border-foreground text-foreground font-medium"
+                          : "border-transparent text-muted-foreground hover:text-foreground hover:border-foreground/40"
+                      }`}
+                    >
+                      <span className="uppercase tracking-wide text-[12px]">{c}</span>
+                      <span className="text-[10px] text-muted-foreground/70 tabular-nums">{count}</span>
+                    </button>
+                  );
+                })}
+              </nav>
+            </aside>
 
-          {filtered.length === 0 && (
-            <div className="text-center py-24 text-muted-foreground">
-              <Layers className="h-10 w-10 mx-auto mb-4 opacity-40" />
-              No products match your search.
+            {/* Product listing */}
+            <div>
+              {query ? (
+                <CatalogueList title={`Results for "${query}"`} items={activeList} />
+              ) : (
+                <CatalogueList title={activeCat} items={activeList} />
+              )}
+
+              {activeList.length === 0 && (
+                <div className="text-center py-20 text-muted-foreground text-sm border border-dashed border-border rounded-xl">
+                  No products match your search.
+                </div>
+              )}
             </div>
-          )}
+          </div>
         </Container>
       </Section>
 
@@ -140,5 +140,44 @@ function Products() {
         </Container>
       </Section>
     </>
+  );
+}
+
+function CatalogueList({ title, items }: { title: string; items: typeof PRODUCTS }) {
+  return (
+    <div>
+      <div className="flex items-baseline justify-between mb-5 pb-4 border-b border-border">
+        <h2 className="text-xl md:text-2xl font-display font-semibold tracking-tight">{title}</h2>
+        <span className="text-xs text-muted-foreground tabular-nums">{items.length} products</span>
+      </div>
+      <ul className="divide-y divide-border">
+        {items.map((p) => (
+          <li key={p.slug}>
+            <Link
+              to="/products/$slug"
+              params={{ slug: p.slug }}
+              className="group flex items-center justify-between gap-6 py-4 px-2 -mx-2 rounded-md hover:bg-muted/50 transition-colors"
+            >
+              <div className="min-w-0 flex-1">
+                <div className="flex items-baseline gap-3 mb-1">
+                  <h3 className="text-[15px] font-medium uppercase tracking-wide text-foreground group-hover:text-accent transition-colors truncate">
+                    {p.name}
+                  </h3>
+                </div>
+                <p className="text-xs text-muted-foreground line-clamp-1">{p.tagline}</p>
+                <div className="hidden sm:flex flex-wrap gap-1.5 mt-2">
+                  {p.grades.slice(0, 4).map((g) => (
+                    <span key={g} className="text-[10px] tracking-wide px-1.5 py-0.5 rounded bg-muted text-muted-foreground border border-border/60">
+                      {g}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <ChevronRight className="h-4 w-4 text-muted-foreground group-hover:text-accent group-hover:translate-x-0.5 transition-all shrink-0" />
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
