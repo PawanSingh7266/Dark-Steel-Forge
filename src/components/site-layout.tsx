@@ -115,16 +115,17 @@ function Footer() {
         <div>
           <h4 className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-4">Contact</h4>
           <ul className="space-y-2.5 text-sm text-foreground/80">
-            <li className="flex items-start gap-2"><MapPin className="h-4 w-4 mt-0.5 text-primary shrink-0" /><span>CP Tank, Mumbai, India</span></li>
-            <li className="flex items-center gap-2"><Phone className="h-4 w-4 text-primary" /><span>+91 98XXX XXXXX</span></li>
-            <li className="flex items-center gap-2"><Mail className="h-4 w-4 text-primary" /><span>info@bhandarimetals.com</span></li>
+            <li className="flex items-start gap-2"><MapPin className="h-4 w-4 mt-0.5 text-primary shrink-0" /><span>95 Manickkam Pillai Street, Mannurpet, Chennai – 600050</span></li>
+            <li className="flex items-center gap-2"><Phone className="h-4 w-4 text-primary" /><a href="tel:+919884050538" className="hover:text-primary transition-colors">+91 98840 50538</a></li>
+            <li className="flex items-center gap-2"><Phone className="h-4 w-4 text-primary" /><a href="tel:+919884118783" className="hover:text-primary transition-colors">+91 98841 18783</a></li>
+            <li className="flex items-center gap-2"><Mail className="h-4 w-4 text-primary" /><a href="mailto:info@bhandarimetalloys.com" className="hover:text-primary transition-colors">info@bhandarimetalloys.com</a></li>
           </ul>
         </div>
       </div>
       <div className="border-t border-steel">
         <div className="max-w-7xl mx-auto px-5 lg:px-8 py-6 flex flex-col md:flex-row items-center justify-between gap-2 text-xs text-muted-foreground">
           <p>© {new Date().getFullYear()} Bhandari Metals & Alloys. All rights reserved.</p>
-          <p className="tracking-wide">Crafted with precision · Mumbai, India</p>
+          <p className="tracking-wide">Crafted with precision · Chennai, India</p>
         </div>
       </div>
     </footer>
