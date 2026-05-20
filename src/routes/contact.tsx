@@ -20,11 +20,12 @@ function Contact() {
             <FadeIn className="lg:col-span-2">
               <div className="space-y-3 h-full">
                 {[
-                  { icon: MapPin, t: "Office", d: "CP Tank, Mumbai, Maharashtra, India" },
-                  { icon: Phone, t: "Phone", d: "+91 98XXX XXXXX" },
-                  { icon: Mail, t: "Email", d: "info@bhandarimetals.com" },
+                  { icon: MapPin, t: "Office", d: "95 Manickkam Pillai Street, Mannurpet, Chennai – 600050", href: "https://www.google.com/maps?q=95+Manickkam+Pillai+Street+Mannurpet+Chennai+600050" },
+                  { icon: Phone, t: "Phone", d: "+91 98840 50538", href: "tel:+919884050538" },
+                  { icon: Phone, t: "Phone", d: "+91 98841 18783", href: "tel:+919884118783" },
+                  { icon: Mail, t: "Email", d: "info@bhandarimetalloys.com", href: "mailto:info@bhandarimetalloys.com" },
                   { icon: Clock, t: "Business Hours", d: "Mon – Sat · 10:00 AM – 7:00 PM" },
-                  { icon: MessageCircle, t: "WhatsApp", d: "Quick response on +91 98XXX XXXXX" },
+                  { icon: MessageCircle, t: "WhatsApp", d: "Quick response on +91 98840 50538", href: "https://wa.me/919884050538" },
                 ].map((c) => (
                   <div key={c.t} className="p-5 rounded-xl glass flex items-start gap-4">
                     <div className="h-10 w-10 rounded-lg bg-primary/10 ring-1 ring-primary/20 grid place-items-center shrink-0">
@@ -32,7 +33,11 @@ function Contact() {
                     </div>
                     <div>
                       <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-1">{c.t}</div>
-                      <div className="text-sm">{c.d}</div>
+                      {c.href ? (
+                        <a href={c.href} className="text-sm hover:text-primary transition-colors">{c.d}</a>
+                      ) : (
+                        <div className="text-sm">{c.d}</div>
+                      )}
                     </div>
                   </div>
                 ))}
@@ -73,7 +78,7 @@ function Contact() {
             <div className="rounded-2xl overflow-hidden glass aspect-[16/7]">
               <iframe
                 title="Map"
-                src="https://www.google.com/maps?q=CP+Tank+Mumbai&output=embed"
+                src="https://www.google.com/maps?q=95+Manickkam+Pillai+Street+Mannurpet+Chennai+600050&output=embed"
                 width="100%"
                 height="100%"
                 style={{ border: 0, filter: "invert(0.92) hue-rotate(180deg) saturate(0.6) brightness(0.9)" }}
