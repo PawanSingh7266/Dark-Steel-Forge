@@ -39,7 +39,8 @@ export const Route = createFileRoute("/products/$category")({
 });
 
 function CategoryPage() {
-  const { category: cat } = Route.useLoaderData();
+  const { category } = Route.useParams();
+  const cat = getCategory(category)!;
 
   return (
     <>

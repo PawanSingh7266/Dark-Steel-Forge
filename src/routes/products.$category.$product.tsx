@@ -39,7 +39,9 @@ export const Route = createFileRoute("/products/$category/$product")({
 });
 
 function ProductDetailPage() {
-  const { category: cat, grade, name } = Route.useLoaderData();
+  const params = Route.useParams();
+  const found = findProduct(params.category, params.product)!;
+  const { category: cat, grade, name } = found;
   const related = cat.grades.filter((g) => g !== grade).slice(0, 3);
 
   return (
