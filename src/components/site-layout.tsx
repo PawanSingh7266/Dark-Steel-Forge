@@ -2,6 +2,7 @@ import { Link, useLocation } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Menu, X, ArrowRight, Mail, Phone, MapPin } from "lucide-react";
+import logoUrl from "@/assets/logo.png";
 
 const NAV = [
   { to: "/", label: "Home" },
@@ -14,20 +15,24 @@ const NAV = [
   { to: "/contact", label: "Contact" },
 ] as const;
 
-function Logo() {
+function Logo({ size = "default" }: { size?: "default" | "lg" }) {
+  const h = size === "lg" ? "h-14" : "h-[42px] md:h-[55px]";
   return (
-    <Link to="/" className="flex items-center gap-2.5 group">
-      <div className="relative h-9 w-9 rounded-md bg-gradient-to-br from-[oklch(0.85_0.02_235)] to-[oklch(0.4_0.04_240)] grid place-items-center shadow-glow">
-        <span className="font-display font-bold text-[oklch(0.14_0.005_240)] text-sm">B</span>
-        <div className="absolute inset-0 rounded-md ring-1 ring-white/20" />
-      </div>
-      <div className="leading-tight">
-        <div className="font-display font-semibold text-sm tracking-wide">BHANDARI</div>
-        <div className="text-[10px] text-muted-foreground tracking-[0.25em] uppercase">Metals & Alloys</div>
+    <Link to="/" className="flex items-center group" aria-label="Bhandari Metals & Alloys — Home">
+      <div className="bg-white rounded-md px-2.5 py-1.5 shadow-[0_2px_18px_-6px_oklch(0.55_0.18_245/0.35)] ring-1 ring-white/40 transition-transform group-hover:scale-[1.02]">
+        <img
+          src={logoUrl}
+          alt="Bhandari Metals & Alloys"
+          className={`${h} w-auto object-contain`}
+          loading="eager"
+          decoding="async"
+        />
       </div>
     </Link>
   );
 }
+
+export { Logo as BrandLogo };
 
 function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -43,7 +48,7 @@ function Header() {
 
   return (
     <header className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${scrolled ? "glass-strong" : "bg-transparent"}`}>
-      <div className="max-w-7xl mx-auto px-5 lg:px-8 h-16 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-5 lg:px-8 h-20 flex items-center justify-between">
         <Logo />
         <nav className="hidden lg:flex items-center gap-1">
           {NAV.map((n) => (
