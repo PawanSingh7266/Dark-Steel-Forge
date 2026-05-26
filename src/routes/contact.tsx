@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { PageHero, Section, Container, FadeIn, Eyebrow } from "@/components/section";
 import { Mail, Phone, MapPin, Clock, MessageCircle, Send } from "lucide-react";
 import { useState } from "react";
+import logoUrl from "@/assets/logo.png";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({ meta: [{ title: "Contact — Bhandari Metals & Alloys" }, { name: "description", content: "Get in touch for inquiries, quotes and partnership discussions." }] }),
@@ -12,7 +13,18 @@ function Contact() {
   const [sent, setSent] = useState(false);
   return (
     <>
-      <PageHero eyebrow="Contact" title={<>Let's <span className="text-gradient-glow">talk steel.</span></>} subtitle="Whether you need a single coil or a full project consignment — our team is ready to respond." />
+      <PageHero
+        eyebrow="Contact"
+        title={<>Let's <span className="text-gradient-glow">talk steel.</span></>}
+        subtitle="Whether you need a single coil or a full project consignment — our team is ready to respond."
+      />
+      <Container>
+        <FadeIn className="-mt-6 mb-10 flex justify-center">
+          <div className="bg-white rounded-2xl px-6 py-4 shadow-[0_10px_40px_-12px_oklch(0.55_0.18_245/0.35)] ring-1 ring-white/40">
+            <img src={logoUrl} alt="Bhandari Metals & Alloys" className="h-16 md:h-20 w-auto" />
+          </div>
+        </FadeIn>
+      </Container>
 
       <Section>
         <Container>
