@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHero, Section, Container, Eyebrow, FadeIn } from "@/components/section";
 import { Award, Users, Factory, Globe2 } from "lucide-react";
+import logoUrl from "@/assets/logo.png";
 
 export const Route = createFileRoute("/about")({
   head: () => ({ meta: [{ title: "About — Bhandari Metals & Alloys" }, { name: "description", content: "Founded in 1983 in CP Tank Mumbai. Four decades of stainless steel legacy and family heritage." }] }),
@@ -18,7 +19,18 @@ const TIMELINE = [
 function About() {
   return (
     <>
-      <PageHero eyebrow="Our Story" title={<>A legacy forged in <span className="text-gradient-glow">stainless steel.</span></>} subtitle="From a small office in CP Tank, Mumbai to serving industries worldwide — the Bhandari journey is one of trust, family and uncompromising quality." />
+      <PageHero
+        eyebrow="Our Story"
+        title={<>A legacy forged in <span className="text-gradient-glow">stainless steel.</span></>}
+        subtitle="From a small office in CP Tank, Mumbai to serving industries worldwide — the Bhandari journey is one of trust, family and uncompromising quality."
+      />
+      <Container>
+        <FadeIn className="-mt-6 mb-12 flex justify-center">
+          <div className="bg-white rounded-2xl px-8 py-5 shadow-[0_14px_50px_-14px_oklch(0.55_0.18_245/0.4)] ring-1 ring-white/40">
+            <img src={logoUrl} alt="Bhandari Metals & Alloys" className="h-20 md:h-24 w-auto" />
+          </div>
+        </FadeIn>
+      </Container>
 
       <Section>
         <Container>
