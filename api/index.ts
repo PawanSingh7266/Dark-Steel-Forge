@@ -45,7 +45,9 @@ async function writeFetchResponse(res: ServerResponse, response: Response) {
 export default async function handler(req: IncomingMessage, res: ServerResponse) {
   try {
     const request = nodeReqToFetchRequest(req);
-    const response: Response = await (server as { fetch: (r: Request) => Promise<Response> }).fetch(request);
+    const response: Response = await (server as { fetch: (r: Request) => Promise<Response> }).fetch(
+      request,
+    );
     await writeFetchResponse(res, response);
   } catch (err) {
     console.error(err);

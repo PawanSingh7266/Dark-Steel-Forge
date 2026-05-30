@@ -59,8 +59,8 @@
   --steel: oklch(0.7 0.015 240);
   --steel-glow: oklch(0.55 0.08 235);
 
-  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
-  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
 
   --gradient-steel: linear-gradient(135deg, oklch(0.45 0.02 240), oklch(0.22 0.01 240));
   --gradient-hero: radial-gradient(ellipse at top, oklch(0.85 0.03 235 / 0.5), transparent 60%);
@@ -69,11 +69,17 @@
   --shadow-elegant: 0 30px 80px -40px oklch(0.2 0.02 240 / 0.18);
 }
 
-.dark { color-scheme: dark; }
+.dark {
+  color-scheme: dark;
+}
 
 @layer base {
-  * { border-color: var(--color-border); }
-  html { scroll-behavior: smooth; }
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    scroll-behavior: smooth;
+  }
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
@@ -84,8 +90,17 @@
       linear-gradient(180deg, oklch(0.99 0.002 240), oklch(0.96 0.004 240));
     min-height: 100vh;
   }
-  h1, h2, h3, h4, h5 { font-family: var(--font-display); letter-spacing: -0.02em; }
-  ::selection { background: oklch(0.55 0.08 235 / 0.25); }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+  ::selection {
+    background: oklch(0.55 0.08 235 / 0.25);
+  }
 }
 
 @layer utilities {
@@ -117,8 +132,18 @@
       linear-gradient(90deg, oklch(0.2 0.01 240 / 0.05) 1px, transparent 1px);
     background-size: 56px 56px;
   }
-  .shadow-glow { box-shadow: var(--shadow-glow); }
-  .shadow-elegant { box-shadow: var(--shadow-elegant); }
-  .ring-glow { box-shadow: 0 0 0 1px oklch(0.55 0.08 235 / 0.25), 0 0 40px oklch(0.55 0.08 235 / 0.12); }
-  .border-steel { border-color: oklch(0.2 0.01 240 / 0.1); }
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+  .shadow-elegant {
+    box-shadow: var(--shadow-elegant);
+  }
+  .ring-glow {
+    box-shadow:
+      0 0 0 1px oklch(0.55 0.08 235 / 0.25),
+      0 0 40px oklch(0.55 0.08 235 / 0.12);
+  }
+  .border-steel {
+    border-color: oklch(0.2 0.01 240 / 0.1);
+  }
 }

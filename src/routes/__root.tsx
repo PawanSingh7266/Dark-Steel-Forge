@@ -74,10 +74,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Bhandari Metals & Alloys | Stainless Steel Supplier Chennai" },
-      { name: "description", content: "Bhandari Metals & Alloys is a leading stainless steel supplier and distributor in Chennai offering sheets, plates, coils, pipes, fittings, flanges and industrial raw materials." },
+      {
+        name: "description",
+        content:
+          "Bhandari Metals & Alloys is a leading stainless steel supplier and distributor in Chennai offering sheets, plates, coils, pipes, fittings, flanges and industrial raw materials.",
+      },
       { name: "author", content: "Bhandari Metals & Alloys" },
-      { property: "og:title", content: "Bhandari Metals & Alloys | Stainless Steel Supplier Chennai" },
-      { property: "og:description", content: "Leading stainless steel supplier and distributor in Chennai — sheets, plates, coils, pipes, fittings, flanges and industrial raw materials." },
+      {
+        property: "og:title",
+        content: "Bhandari Metals & Alloys | Stainless Steel Supplier Chennai",
+      },
+      {
+        property: "og:description",
+        content:
+          "Leading stainless steel supplier and distributor in Chennai — sheets, plates, coils, pipes, fittings, flanges and industrial raw materials.",
+      },
       { property: "og:image", content: "/og-image.png" },
       { name: "twitter:image", content: "/og-image.png" },
       { property: "og:type", content: "website" },
@@ -91,7 +102,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap",
+      },
     ],
   }),
   shellComponent: RootShell,

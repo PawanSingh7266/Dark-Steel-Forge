@@ -6,33 +6,82 @@ import sheets from "@/assets/products-sheets.jpg";
 import coils from "@/assets/products-coils.jpg";
 
 export const Route = createFileRoute("/infrastructure")({
-  head: () => ({ meta: [{ title: "Infrastructure — Bhandari Metals & Alloys" }, { name: "description", content: "Modern warehousing, machinery, logistics and quality inspection infrastructure." }] }),
+  head: () => ({
+    meta: [
+      { title: "Infrastructure — Bhandari Metals & Alloys" },
+      {
+        name: "description",
+        content: "Modern warehousing, machinery, logistics and quality inspection infrastructure.",
+      },
+    ],
+  }),
   component: Infra,
 });
 
 const CAPS = [
-  { icon: Warehouse, t: "Modern Warehousing", d: "Organized stocking systems for fast retrieval and minimal handling damage." },
-  { icon: Cog, t: "Processing Machinery", d: "Slitting, shearing and cutting equipment for tailored dimensions." },
-  { icon: Search, t: "Quality Inspection", d: "In-house verification of dimensions, surface and material certificates." },
-  { icon: Boxes, t: "Inventory Depth", d: "Wide range of grades, sizes and finishes ready for immediate dispatch." },
-  { icon: Truck, t: "Logistics Coordination", d: "Pan-India and export logistics handled by an experienced dispatch team." },
-  { icon: PackageCheck, t: "Custom Packaging", d: "Export-grade packaging for safe long-distance transit." },
+  {
+    icon: Warehouse,
+    t: "Modern Warehousing",
+    d: "Organized stocking systems for fast retrieval and minimal handling damage.",
+  },
+  {
+    icon: Cog,
+    t: "Processing Machinery",
+    d: "Slitting, shearing and cutting equipment for tailored dimensions.",
+  },
+  {
+    icon: Search,
+    t: "Quality Inspection",
+    d: "In-house verification of dimensions, surface and material certificates.",
+  },
+  {
+    icon: Boxes,
+    t: "Inventory Depth",
+    d: "Wide range of grades, sizes and finishes ready for immediate dispatch.",
+  },
+  {
+    icon: Truck,
+    t: "Logistics Coordination",
+    d: "Pan-India and export logistics handled by an experienced dispatch team.",
+  },
+  {
+    icon: PackageCheck,
+    t: "Custom Packaging",
+    d: "Export-grade packaging for safe long-distance transit.",
+  },
 ];
 
 function Infra() {
   return (
     <>
-      <PageHero eyebrow="Infrastructure" title={<>Built for scale, <span className="text-gradient-glow">tuned for precision.</span></>} subtitle="Decades of operational refinement go into every consignment that leaves our facility — from inventory to inspection to dispatch." />
+      <PageHero
+        eyebrow="Infrastructure"
+        title={
+          <>
+            Built for scale, <span className="text-gradient-glow">tuned for precision.</span>
+          </>
+        }
+        subtitle="Decades of operational refinement go into every consignment that leaves our facility — from inventory to inspection to dispatch."
+      />
 
       <Section>
         <Container>
           <FadeIn>
             <div className="relative aspect-[16/8] rounded-3xl overflow-hidden glass">
-              <img src={infra} alt="Warehouse" loading="lazy" className="w-full h-full object-cover" />
+              <img
+                src={infra}
+                alt="Warehouse"
+                loading="lazy"
+                className="w-full h-full object-cover"
+              />
               <div className="absolute inset-0 bg-gradient-to-t from-background/85 via-background/10 to-transparent" />
               <div className="absolute bottom-0 inset-x-0 p-10 md:p-14">
-                <div className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Mumbai, India</div>
-                <h2 className="text-3xl md:text-5xl font-display font-semibold max-w-2xl">Operations engineered for industrial reliability.</h2>
+                <div className="text-xs uppercase tracking-[0.25em] text-primary mb-2">
+                  Mumbai, India
+                </div>
+                <h2 className="text-3xl md:text-5xl font-display font-semibold max-w-2xl">
+                  Operations engineered for industrial reliability.
+                </h2>
               </div>
             </div>
           </FadeIn>
@@ -43,7 +92,9 @@ function Infra() {
         <Container>
           <FadeIn className="max-w-2xl mb-12">
             <Eyebrow>Capabilities</Eyebrow>
-            <h2 className="text-4xl md:text-5xl font-semibold">Everything required to <span className="text-gradient-steel">deliver, on time.</span></h2>
+            <h2 className="text-4xl md:text-5xl font-semibold">
+              Everything required to <span className="text-gradient-steel">deliver, on time.</span>
+            </h2>
           </FadeIn>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {CAPS.map((c, i) => (

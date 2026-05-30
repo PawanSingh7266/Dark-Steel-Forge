@@ -1,83 +1,244 @@
-import sheetsImg from "@/assets/products-sheets.jpg";
-import coilsImg from "@/assets/products-coils.jpg";
-import pipesImg from "@/assets/products-pipes.jpg";
-import barsImg from "@/assets/products-bars.jpg";
-import flangesImg from "@/assets/products-flanges.jpg";
-import platesImg from "@/assets/products-plates.jpg";
-import structuralImg from "@/assets/products-structural.jpg";
-import alloysImg from "@/assets/products-alloys.jpg";
-import decorativeImg from "@/assets/products-decorative.jpg";
+import sheetsImg from "@/assets/ssss-sheets.jpg";
+import plateImg from "@/assets/ssss-plate.jpg";
+import coilImg from "@/assets/ssss-coil.jpg";
+import chequeredImg from "@/assets/ssss-chequered.jpg";
+import fittingsImg from "@/assets/ssss-pipe-fittings.jpg";
+import weldedImg from "@/assets/ssss-welded-pipes.jpg";
+import seamlessImg from "@/assets/ssss-seamless-pipes.jpg";
+import rodsImg from "@/assets/ssss-rods.jpg";
+import anglesImg from "@/assets/ssss-angles.jpg";
+import flatsImg from "@/assets/ssss-flats.jpg";
+import flangesImg from "@/assets/ssss-flanges.jpg";
+import designerImg from "@/assets/ssss-designer-sheets.jpg";
+import slitCoilImg from "@/assets/ssss-slit-coil.jpg";
 
-export type Category = {
-  slug: string;            // e.g. "stainless-steel-sheets"
-  name: string;            // e.g. "Stainless Steel Sheets"
-  shortName: string;       // e.g. "Sheets"
-  group: "Stainless Steel" | "Pipes & Tubes" | "Flanges & Fittings" | "Long Products" | "Structural" | "High-Performance Alloys";
-  tagline: string;
-  image: string;
-  grades: string[];        // e.g. ["202","304","304L",...]
+export const COMPANY = "Bhandari metal & alloyes";
+
+const CAT_SLUG_TO_DIR: Record<string, string> = {
+  "stainless-steel-sheets": "sheets",
+  "stainless-steel-plate": "plate",
+  "stainless-steel-coil": "coil",
+  "stainless-steel-chequered-sheets": "chequered",
+  "stainless-steel-pipe-fittings": "pipe-fittings",
+  "stainless-steel-welded-pipes": "welded-pipes",
+  "stainless-steel-seamless-pipes": "seamless-pipes",
+  "stainless-steel-rods": "rods",
+  "stainless-steel-angles": "angles",
+  "stainless-steel-flats": "flats",
+  "stainless-steel-flanges": "flanges",
+  "stainless-steel-designer-sheets": "designer-sheets",
+  "stainless-steel-slit-coil": "slit-coil",
 };
 
-const SS_FLAT_GRADES = [
-  "202","301","304","304L","309","309S","310","310S","316","316L","316Ti","317L","321","347",
-  "409M","410","430","441","Duplex 2205","Duplex 2507","Hastelloy","Inconel","X2CrNi12","X5CrNi1810","253 MA","16Mo3",
+const CAT_IMAGE_COUNTS: Record<string, number> = {
+  "stainless-steel-sheets": 25,
+  "stainless-steel-plate": 26,
+  "stainless-steel-coil": 27,
+  "stainless-steel-chequered-sheets": 21,
+  "stainless-steel-pipe-fittings": 27,
+  "stainless-steel-welded-pipes": 27,
+  "stainless-steel-seamless-pipes": 27,
+  "stainless-steel-rods": 25,
+  "stainless-steel-angles": 26,
+  "stainless-steel-flats": 27,
+  "stainless-steel-flanges": 27,
+  "stainless-steel-designer-sheets": 2,
+  "stainless-steel-slit-coil": 28,
+};
+
+export function getGradeImage(catSlug: string, gradeIndex: number): string {
+  const dir = CAT_SLUG_TO_DIR[catSlug] || "sheets";
+  const count = CAT_IMAGE_COUNTS[catSlug] || 24;
+  return `/images/products/${dir}/${gradeIndex % count}.jpg`;
+}
+
+export type Category = {
+  slug: string;
+  name: string;
+  shortName: string;
+  image: string;
+  grades: string[];
+};
+
+const GRADE_SHEETS = [
+  "202", "301", "304", "304L", "316", "316L", "310", "310S",
+  "309", "309S", "316Ti", "321", "409M", "430", "441", "410",
+  "Duplex", "Duplex 2205", "Duplex 2507", "Hastelloy", "Inconel",
+  "X2CrNi12", "X5CrNi1810", "253 MA", "16Mo3",
 ];
 
-const SS_PIPE_GRADES = [
-  "304","304L","304H","316","316L","316H","317L","321","321H","347","Duplex 2205","Duplex 2507",
+const GRADE_PLATE = [
+  "202", "304", "304L", "316", "316L", "310", "310S", "309",
+  "316Ti", "321", "904L", "409M", "409L", "409", "430", "441", "410",
+  "Duplex", "Duplex 2205", "Duplex 2507", "Hastelloy", "Inconel",
+  "X2CrNi12", "X5CrNi1810", "253 MA", "16Mo3",
 ];
 
-const SS_LONG_GRADES = [
-  "303","304","304L","316","316L","410","416","420","430","431","17-4 PH","Duplex 2205",
+const GRADE_COIL = [
+  "202", "304", "304L", "316", "316L", "309", "309S", "310", "310S",
+  "316Ti", "904L", "409M", "409L", "430", "410", "321", "441", "409",
+  "Duplex", "Duplex 2205", "Duplex 2507", "Hastelloy", "Inconel",
+  "X2CrNi12", "X5CrNi1810", "253 MA", "16Mo3",
 ];
 
-const SS_STRUCT_GRADES = ["304","304L","316","316L","410","430"];
+const GRADE_CHEQUERED = [
+  "202", "304", "304L", "316", "316L", "310", "310S", "309",
+  "316Ti", "321", "904L", "409M", "409L", "409", "430", "441", "410",
+  "Duplex", "Duplex 2205", "X5CrNi1810",
+];
+
+const GRADE_PIPE_FITTINGS = [
+  "202", "304", "304L", "316", "316L", "310", "310S", "309",
+  "301S", "316Ti", "321", "904L", "409M", "409L", "409", "430", "441", "410",
+  "Duplex", "Duplex 2205", "Duplex 2507", "Hastelloy", "Inconel",
+  "X2CrNi12", "X5CrNi1810", "253 MA", "16Mo3",
+];
+
+const GRADE_WELDED_PIPES = [
+  "202", "304", "304L", "316", "316L", "310", "310S", "309", "309S",
+  "316Ti", "321", "904L", "409M", "409L", "409", "430", "441", "410",
+  "Duplex", "Duplex 2205", "Duplex 2507", "Hastelloy", "Inconel",
+  "X2CrNi12", "X5CrNi1810", "253 MA", "16Mo3",
+];
+
+const GRADE_SEAMLESS_PIPES = [
+  "202", "304", "304L", "316", "316L", "310", "310S", "309", "309S",
+  "316Ti", "321", "904L", "409M", "409L", "409", "430", "441", "410",
+  "Duplex", "Duplex 2205", "Duplex 2507", "Hastelloy", "Inconel",
+  "X2CrNi12", "X5CrNi1810", "253 MA", "16Mo3",
+];
+
+const GRADE_RODS = [
+  "202", "304", "304L", "316", "316L", "310", "310S", "309",
+  "321", "904L", "409M", "409L", "409", "430", "441", "410",
+  "Duplex", "Duplex 2205", "Duplex 2507", "Hastelloy", "Inconel",
+  "X2CrNi12", "X5CrNi1810", "253 MA", "16Mo3",
+];
+
+const GRADE_ANGLES = [
+  "202", "304", "304L", "316", "316L", "310", "310S", "309",
+  "301SS", "301", "316Ti", "321", "904L", "409M", "409L", "409", "430", "441", "410",
+  "Duplex", "Duplex 2205", "Duplex 2507", "Hastelloy", "Inconel",
+  "X2CrNi12", "X5CrNi1810", "253 MA", "16Mo3",
+];
+
+const GRADE_FLATS = [
+  "202", "304", "304L", "316", "316L", "310", "310S", "309",
+  "301S", "304 SS Flat", "316Ti", "321", "904L", "409M", "409L", "409", "430", "441", "410",
+  "Duplex", "Duplex 2205", "Duplex 2507", "Hastelloy", "Inconel",
+  "X2CrNi12", "X5CrNi1810", "253 MA", "16Mo3",
+];
+
+const GRADE_FLANGES = [
+  "202", "304", "304L", "316", "316L", "310", "310S", "309",
+  "301S", "316Ti", "321", "904L", "409M", "409L", "409", "430", "441", "410",
+  "Duplex", "Duplex 2205", "Duplex 2507", "Hastelloy", "Inconel",
+  "X2CrNi12", "X5CrNi1810", "253 MA", "16Mo3",
+];
+
+const GRADE_DESIGNER = ["202", "304"];
+
+const GRADE_SLIT_COIL = [
+  "202", "304", "304L", "316", "316L", "304",
+  "309", "309S", "310", "310S", "316Ti", "904L", "409M",
+  "409L", "430", "410", "321", "441", "409",
+  "Duplex", "Duplex 2205", "Duplex 2507", "Hastelloy", "Inconel",
+  "X2CrNi12", "X5CrNi1810", "253 MA", "16Mo3",
+];
 
 export const CATEGORIES: Category[] = [
-  // Stainless Steel — flat
-  { slug: "stainless-steel-sheets", name: "Stainless Steel Sheets", shortName: "Sheets", group: "Stainless Steel", tagline: "Cold and hot rolled sheets engineered for precision fabrication.", image: sheetsImg, grades: SS_FLAT_GRADES },
-  { slug: "stainless-steel-coils", name: "Stainless Steel Coils", shortName: "Coils", group: "Stainless Steel", tagline: "Mill-edge and slit coils for high-volume downstream processing.", image: coilsImg, grades: SS_FLAT_GRADES },
-  { slug: "stainless-steel-plates", name: "Stainless Steel Plates", shortName: "Plates", group: "Stainless Steel", tagline: "Heavy-gauge plates for pressure vessels and structural fabrication.", image: platesImg, grades: SS_FLAT_GRADES },
-  { slug: "stainless-steel-chequered-plates", name: "Stainless Steel Chequered Plates", shortName: "Chequered Plates", group: "Stainless Steel", tagline: "Anti-skid embossed plates for flooring and platforms.", image: platesImg, grades: ["304","304L","316L","409"] },
-
-  // Pipes & Tubes
-  { slug: "stainless-steel-pipes", name: "Stainless Steel Pipes", shortName: "Pipes", group: "Pipes & Tubes", tagline: "Seamless and welded pipes for high-integrity piping systems.", image: pipesImg, grades: SS_PIPE_GRADES },
-  { slug: "stainless-steel-seamless-pipes", name: "Stainless Steel Seamless Pipes", shortName: "Seamless Pipes", group: "Pipes & Tubes", tagline: "Cold-drawn seamless pipes for high-pressure service.", image: pipesImg, grades: SS_PIPE_GRADES },
-  { slug: "stainless-steel-welded-pipes", name: "Stainless Steel Welded Pipes", shortName: "Welded Pipes", group: "Pipes & Tubes", tagline: "ERW and EFW welded pipes for utility and process lines.", image: pipesImg, grades: SS_PIPE_GRADES },
-  { slug: "stainless-steel-tubes", name: "Stainless Steel Tubes", shortName: "Tubes", group: "Pipes & Tubes", tagline: "Precision tubes for heat exchangers and instrumentation.", image: pipesImg, grades: SS_PIPE_GRADES },
-
-  // Flanges & Fittings
-  { slug: "stainless-steel-flanges", name: "Stainless Steel Flanges", shortName: "Flanges", group: "Flanges & Fittings", tagline: "Forged flanges in WN, SO, BL, SW and threaded configurations.", image: flangesImg, grades: SS_PIPE_GRADES },
-  { slug: "stainless-steel-pipe-fittings", name: "Stainless Steel Pipe Fittings", shortName: "Pipe Fittings", group: "Flanges & Fittings", tagline: "Buttweld and forged fittings for high-integrity piping.", image: flangesImg, grades: SS_PIPE_GRADES },
-
-  // Long products
-  { slug: "stainless-steel-bars", name: "Stainless Steel Bars", shortName: "Bars", group: "Long Products", tagline: "Round, square and hex bars for machining and forging.", image: barsImg, grades: SS_LONG_GRADES },
-  { slug: "stainless-steel-rods", name: "Stainless Steel Rods", shortName: "Rods", group: "Long Products", tagline: "Cold-drawn and centreless-ground rods in tight tolerances.", image: barsImg, grades: SS_LONG_GRADES },
-
-  // Structural
-  { slug: "stainless-steel-flats", name: "Stainless Steel Flats", shortName: "Flats", group: "Structural", tagline: "Rolled and forged flat bars for structural and engineering use.", image: structuralImg, grades: SS_STRUCT_GRADES },
-  { slug: "stainless-steel-angles", name: "Stainless Steel Angles", shortName: "Angles", group: "Structural", tagline: "Equal and unequal angles for structural and architectural framing.", image: structuralImg, grades: SS_STRUCT_GRADES },
-  { slug: "stainless-steel-channels", name: "Stainless Steel Channels", shortName: "Channels", group: "Structural", tagline: "C and U channels for industrial structures and supports.", image: structuralImg, grades: SS_STRUCT_GRADES },
-  { slug: "stainless-steel-designer-sheets", name: "Stainless Steel Designer Sheets", shortName: "Designer Sheets", group: "Structural", tagline: "Etched, embossed and PVD-coated sheets for premium architecture.", image: decorativeImg, grades: ["304","316","430"] },
-  { slug: "stainless-steel-slit-coils", name: "Stainless Steel Slit Coils", shortName: "Slit Coils", group: "Structural", tagline: "Precision slit coils to customer width and gauge.", image: coilsImg, grades: SS_FLAT_GRADES },
-
-  // High-Performance Alloys
-  { slug: "alloy-products", name: "Alloy Products", shortName: "Alloy", group: "High-Performance Alloys", tagline: "Chromium-molybdenum alloy steels for high-temperature service.", image: alloysImg, grades: ["A335 P5","A335 P9","A335 P11","A335 P22","A335 P91","A387 Gr.11","A387 Gr.22","4140","4340"] },
-  { slug: "duplex-products", name: "Duplex Products", shortName: "Duplex", group: "High-Performance Alloys", tagline: "Duplex and super-duplex stainless for corrosive service.", image: alloysImg, grades: ["2205","2507","S31803","S32750","S32760","Zeron 100"] },
-  { slug: "inconel-products", name: "Inconel Products", shortName: "Inconel", group: "High-Performance Alloys", tagline: "Nickel-chromium superalloys for extreme temperature and corrosion.", image: alloysImg, grades: ["600","601","625","718","800","800H","800HT","825"] },
-  { slug: "hastelloy-products", name: "Hastelloy Products", shortName: "Hastelloy", group: "High-Performance Alloys", tagline: "Nickel-molybdenum alloys for severe chemical environments.", image: alloysImg, grades: ["B2","B3","C4","C22","C276","X","G-30"] },
-  { slug: "titanium-products", name: "Titanium Products", shortName: "Titanium", group: "High-Performance Alloys", tagline: "Titanium grades for aerospace, medical and marine service.", image: alloysImg, grades: ["Gr.1","Gr.2","Gr.5","Gr.7","Gr.9","Gr.11","Gr.12"] },
-  { slug: "nickel-alloy-products", name: "Nickel Alloy Products", shortName: "Nickel Alloy", group: "High-Performance Alloys", tagline: "Pure nickel and Monel grades for extreme corrosion resistance.", image: alloysImg, grades: ["Nickel 200","Nickel 201","Monel 400","Monel K-500","Incoloy 800","Incoloy 825"] },
+  {
+    slug: "stainless-steel-sheets",
+    name: "Stainless Steel Sheets",
+    shortName: "Sheets",
+    image: sheetsImg,
+    grades: GRADE_SHEETS,
+  },
+  {
+    slug: "stainless-steel-plate",
+    name: "Stainless Steel Plate",
+    shortName: "Plate",
+    image: plateImg,
+    grades: GRADE_PLATE,
+  },
+  {
+    slug: "stainless-steel-coil",
+    name: "Stainless Steel Coil",
+    shortName: "Coil",
+    image: coilImg,
+    grades: GRADE_COIL,
+  },
+  {
+    slug: "stainless-steel-chequered-sheets",
+    name: "Stainless Steel Chequered Sheets",
+    shortName: "Chequered Sheets",
+    image: chequeredImg,
+    grades: GRADE_CHEQUERED,
+  },
+  {
+    slug: "stainless-steel-pipe-fittings",
+    name: "Stainless Steel Pipe Fittings",
+    shortName: "Pipe Fittings",
+    image: fittingsImg,
+    grades: GRADE_PIPE_FITTINGS,
+  },
+  {
+    slug: "stainless-steel-welded-pipes",
+    name: "Stainless Steel Welded Pipes",
+    shortName: "Welded Pipes",
+    image: weldedImg,
+    grades: GRADE_WELDED_PIPES,
+  },
+  {
+    slug: "stainless-steel-seamless-pipes",
+    name: "Stainless Steel Seamless Pipes",
+    shortName: "Seamless Pipes",
+    image: seamlessImg,
+    grades: GRADE_SEAMLESS_PIPES,
+  },
+  {
+    slug: "stainless-steel-rods",
+    name: "Stainless Steel Rods",
+    shortName: "Rods",
+    image: rodsImg,
+    grades: GRADE_RODS,
+  },
+  {
+    slug: "stainless-steel-angles",
+    name: "Stainless Steel Angles",
+    shortName: "Angles",
+    image: anglesImg,
+    grades: GRADE_ANGLES,
+  },
+  {
+    slug: "stainless-steel-flats",
+    name: "Stainless Steel Flats",
+    shortName: "Flats",
+    image: flatsImg,
+    grades: GRADE_FLATS,
+  },
+  {
+    slug: "stainless-steel-flanges",
+    name: "Stainless Steel Flanges",
+    shortName: "Flanges",
+    image: flangesImg,
+    grades: GRADE_FLANGES,
+  },
+  {
+    slug: "stainless-steel-designer-sheets",
+    name: "Stainless Steel Designer Sheets",
+    shortName: "Designer Sheets",
+    image: designerImg,
+    grades: GRADE_DESIGNER,
+  },
+  {
+    slug: "stainless-steel-slit-coil",
+    name: "Stainless Steel Slit Coil",
+    shortName: "Slit Coil",
+    image: slitCoilImg,
+    grades: GRADE_SLIT_COIL,
+  },
 ];
-
-export const GROUPS = [
-  "Stainless Steel",
-  "Pipes & Tubes",
-  "Flanges & Fittings",
-  "Long Products",
-  "Structural",
-  "High-Performance Alloys",
-] as const;
 
 export function getCategory(slug: string): Category | undefined {
   return CATEGORIES.find((c) => c.slug === slug);
@@ -92,15 +253,18 @@ export function gradeSlug(grade: string): string {
 }
 
 export function productSlug(grade: string, cat: Category): string {
-  return `${gradeSlug(grade)}-${cat.slug.replace(/^stainless-steel-/, "")}`.replace(/-+/g, "-");
+  const base = cat.slug.replace(/^stainless-steel-/, "");
+  return `${gradeSlug(grade)}-${base}`.replace(/-+/g, "-");
 }
 
 export function productName(grade: string, cat: Category): string {
-  // Always end with the full category name e.g. "304 Stainless Steel Sheets"
   return `${grade} ${cat.name}`;
 }
 
-export function findProduct(catSlug: string, prodSlug: string): { category: Category; grade: string; name: string; slug: string } | undefined {
+export function findProduct(
+  catSlug: string,
+  prodSlug: string,
+): { category: Category; grade: string; name: string; slug: string } | undefined {
   const cat = getCategory(catSlug);
   if (!cat) return undefined;
   const grade = cat.grades.find((g) => productSlug(g, cat) === prodSlug);

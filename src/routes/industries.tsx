@@ -1,6 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHero, Section, Container, FadeIn } from "@/components/section";
-import { Flame, Beaker, Zap, Pill, Anchor, Building2, HardHat, Wrench, Car, Cog } from "lucide-react";
+import {
+  Flame,
+  Beaker,
+  Zap,
+  Pill,
+  Anchor,
+  Building2,
+  HardHat,
+  Wrench,
+  Car,
+  Cog,
+} from "lucide-react";
 import oilGas from "@/assets/industries/oil-gas.jpg";
 import petrochemicals from "@/assets/industries/petrochemicals.jpg";
 import powerPlants from "@/assets/industries/power-plants.jpg";
@@ -13,27 +24,94 @@ import automotive from "@/assets/industries/automotive.jpg";
 import manufacturing from "@/assets/industries/manufacturing.jpg";
 
 export const Route = createFileRoute("/industries")({
-  head: () => ({ meta: [{ title: "Industries Served — Bhandari Metals & Alloys" }, { name: "description", content: "Trusted material partner for oil & gas, power, pharma, marine, infrastructure and more." }] }),
+  head: () => ({
+    meta: [
+      { title: "Industries Served — Bhandari Metals & Alloys" },
+      {
+        name: "description",
+        content:
+          "Trusted material partner for oil & gas, power, pharma, marine, infrastructure and more.",
+      },
+    ],
+  }),
   component: Industries,
 });
 
 const IND = [
-  { icon: Flame, name: "Oil & Gas", desc: "Pipelines, refineries and offshore systems requiring corrosion-resistant alloys.", image: oilGas },
-  { icon: Beaker, name: "Petrochemicals", desc: "Process piping, vessels and equipment for aggressive chemical environments.", image: petrochemicals },
-  { icon: Zap, name: "Power Plants", desc: "Heat exchangers, condensers and high-temperature service components.", image: powerPlants },
-  { icon: Pill, name: "Pharmaceuticals", desc: "Sanitary tubing and equipment surfaces for hygienic manufacturing.", image: pharmaceuticals },
-  { icon: Anchor, name: "Marine", desc: "Chloride-resistant grades engineered for coastal and offshore service.", image: marine },
-  { icon: Building2, name: "Infrastructure", desc: "Architectural cladding, bridges and modern urban infrastructure.", image: infrastructure },
-  { icon: HardHat, name: "Construction", desc: "Structural plates, bars and fabricated assemblies.", image: construction },
-  { icon: Wrench, name: "Heavy Engineering", desc: "Forging stock, bars and engineering raw material to spec.", image: heavyEngineering },
-  { icon: Car, name: "Automotive", desc: "Auto components, exhaust systems and precision fabricated parts.", image: automotive },
-  { icon: Cog, name: "Manufacturing", desc: "OEMs and downstream processors across general industry.", image: manufacturing },
+  {
+    icon: Flame,
+    name: "Oil & Gas",
+    desc: "Pipelines, refineries and offshore systems requiring corrosion-resistant alloys.",
+    image: oilGas,
+  },
+  {
+    icon: Beaker,
+    name: "Petrochemicals",
+    desc: "Process piping, vessels and equipment for aggressive chemical environments.",
+    image: petrochemicals,
+  },
+  {
+    icon: Zap,
+    name: "Power Plants",
+    desc: "Heat exchangers, condensers and high-temperature service components.",
+    image: powerPlants,
+  },
+  {
+    icon: Pill,
+    name: "Pharmaceuticals",
+    desc: "Sanitary tubing and equipment surfaces for hygienic manufacturing.",
+    image: pharmaceuticals,
+  },
+  {
+    icon: Anchor,
+    name: "Marine",
+    desc: "Chloride-resistant grades engineered for coastal and offshore service.",
+    image: marine,
+  },
+  {
+    icon: Building2,
+    name: "Infrastructure",
+    desc: "Architectural cladding, bridges and modern urban infrastructure.",
+    image: infrastructure,
+  },
+  {
+    icon: HardHat,
+    name: "Construction",
+    desc: "Structural plates, bars and fabricated assemblies.",
+    image: construction,
+  },
+  {
+    icon: Wrench,
+    name: "Heavy Engineering",
+    desc: "Forging stock, bars and engineering raw material to spec.",
+    image: heavyEngineering,
+  },
+  {
+    icon: Car,
+    name: "Automotive",
+    desc: "Auto components, exhaust systems and precision fabricated parts.",
+    image: automotive,
+  },
+  {
+    icon: Cog,
+    name: "Manufacturing",
+    desc: "OEMs and downstream processors across general industry.",
+    image: manufacturing,
+  },
 ];
 
 function Industries() {
   return (
     <>
-      <PageHero eyebrow="Industries Served" title={<>Powering progress across <span className="text-gradient-glow">every sector.</span></>} subtitle="From the depths of the ocean to the heart of a refinery — Bhandari materials are engineered to perform in the world's most demanding environments." />
+      <PageHero
+        eyebrow="Industries Served"
+        title={
+          <>
+            Powering progress across <span className="text-gradient-glow">every sector.</span>
+          </>
+        }
+        subtitle="From the depths of the ocean to the heart of a refinery — Bhandari materials are engineered to perform in the world's most demanding environments."
+      />
       <Section>
         <Container>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
