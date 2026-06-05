@@ -97,8 +97,8 @@ function Header() {
                 <Link
                   key={n.to}
                   to={n.to}
-                  className="px-3 py-2.5 text-sm text-muted-foreground hover:text-foreground"
-                  activeProps={{ className: "px-3 py-2.5 text-sm text-foreground" }}
+                  className="px-3 py-2.5 text-sm font-medium tracking-wide text-muted-foreground hover:text-foreground"
+                  activeProps={{ className: "px-3 py-2.5 text-sm font-semibold tracking-wide text-foreground" }}
                   activeOptions={{ exact: n.to === "/" }}
                 >
                   {n.label}
