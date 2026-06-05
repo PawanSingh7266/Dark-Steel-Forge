@@ -13,6 +13,8 @@ import {
 } from "lucide-react";
 import hero from "@/assets/hero-industrial.jpg";
 import sheets from "@/assets/products-sheets.jpg";
+import jslLogo from "@/assets/jsl-logo.jpeg.asset.json";
+import sailLogo from "@/assets/sail-logo.jpeg.asset.json";
 import pipes from "@/assets/products-pipes.jpg";
 import coils from "@/assets/products-coils.jpg";
 import infra from "@/assets/infrastructure.jpg";
@@ -132,17 +134,28 @@ function Home() {
         <Container>
           <div className="grid md:grid-cols-4 gap-px bg-border rounded-2xl overflow-hidden glass">
             {[
-              { v: "40+", l: "Years of Legacy" },
-              { v: "JSL", l: "Authorized Distributor" },
-              { v: "SAIL", l: "Authorized Distributor" },
-              { v: "Global", l: "Industrial Supply" },
+              { v: "40+", l: "Years of Legacy", type: "text" as const },
+              { v: "Global", l: "Industrial Supply", type: "text" as const },
+              { logo: jslLogo.url, name: "JSL", l: "Authorized Distributor", type: "logo" as const },
+              { logo: sailLogo.url, name: "SAIL", l: "Authorized Distributor", type: "logo" as const },
             ].map((s, i) => (
-              <FadeIn key={s.l} delay={i * 0.08}>
-                <div className="bg-card p-8 md:p-10 h-full">
-                  <div className="text-4xl md:text-5xl font-display font-semibold text-gradient-steel">
-                    {s.v}
-                  </div>
-                  <div className="mt-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">
+              <FadeIn key={s.l + i} delay={i * 0.08}>
+                <div className="bg-card p-8 md:p-10 h-full flex flex-col justify-center">
+                  {s.type === "text" ? (
+                    <div className="text-4xl md:text-5xl font-display font-semibold text-gradient-steel">
+                      {s.v}
+                    </div>
+                  ) : (
+                    <div className="h-12 md:h-14 flex items-center">
+                      <img
+                        src={s.logo}
+                        alt={`${s.name} logo`}
+                        loading="lazy"
+                        className="max-h-full w-auto object-contain"
+                      />
+                    </div>
+                  )}
+                  <div className="mt-3 text-xs uppercase tracking-[0.2em] text-muted-foreground">
                     {s.l}
                   </div>
                 </div>
@@ -307,9 +320,23 @@ function Home() {
                   </h3>
                 </div>
                 <div className="grid grid-cols-2 gap-4">
-                  {["JSL", "SAIL"].map((p) => (
-                    <div key={p} className="aspect-[3/2] rounded-xl glass grid place-items-center">
-                      <div className="font-display text-3xl font-bold text-gradient-steel">{p}</div>
+                  {[
+                    { name: "JSL", logo: jslLogo.url },
+                    { name: "SAIL", logo: sailLogo.url },
+                  ].map((p) => (
+                    <div
+                      key={p.name}
+                      className="group aspect-[3/2] rounded-xl bg-white border border-border/60 shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all p-5 flex flex-col items-center justify-center gap-2"
+                    >
+                      <img
+                        src={p.logo}
+                        alt={`${p.name} official logo`}
+                        loading="lazy"
+                        className="max-h-16 md:max-h-20 w-auto object-contain"
+                      />
+                      <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+                        Authorized Distributor
+                      </div>
                     </div>
                   ))}
                 </div>
