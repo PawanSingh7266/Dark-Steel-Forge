@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHero, Section, Container, FadeIn, Eyebrow } from "@/components/section";
 import { ShieldCheck, Award, FileCheck2, Stamp } from "lucide-react";
+import jslLogo from "@/assets/jsl-logo.jpeg.asset.json";
+import sailLogo from "@/assets/sail-logo.jpeg.asset.json";
 
 export const Route = createFileRoute("/certifications")({
   head: () => ({
@@ -35,26 +37,35 @@ function Certs() {
             {[
               {
                 name: "JSL",
+                logo: jslLogo.url,
                 full: "Jindal Stainless Limited",
                 desc: "Authorized Distributor — direct sourcing of premium stainless steel grades from India's largest stainless producer.",
               },
               {
                 name: "SAIL",
+                logo: sailLogo.url,
                 full: "Steel Authority of India Limited",
                 desc: "Authorized Distributor — supply of carbon and specialty steel products from India's national steel maker.",
               },
             ].map((p, i) => (
               <FadeIn key={p.name} delay={i * 0.1}>
-                <div className="relative h-full overflow-hidden rounded-3xl glass p-10 md:p-12">
-                  <div className="absolute -inset-px rounded-3xl bg-gradient-to-br from-primary/20 via-transparent to-transparent opacity-50" />
-                  <div className="relative">
+                <div className="group relative h-full overflow-hidden rounded-3xl border border-border/60 bg-card shadow-sm hover:shadow-xl hover:-translate-y-0.5 transition-all p-8 md:p-10">
+                  <div className="absolute -inset-px rounded-3xl bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-60 pointer-events-none" />
+                  <div className="relative flex flex-col h-full">
                     <div className="flex items-center gap-2 text-primary text-xs uppercase tracking-[0.25em] mb-6">
                       <Stamp className="h-4 w-4" /> Authorized Distributor
                     </div>
-                    <div className="font-display text-6xl md:text-7xl font-bold text-gradient-steel mb-3">
+                    <div className="rounded-2xl bg-white border border-border/50 p-8 md:p-10 mb-6 flex items-center justify-center min-h-[160px] md:min-h-[200px]">
+                      <img
+                        src={p.logo}
+                        alt={`${p.full} official logo`}
+                        className="max-h-24 md:max-h-32 w-auto object-contain"
+                      />
+                    </div>
+                    <div className="font-display text-2xl md:text-3xl font-bold text-foreground mb-1">
                       {p.name}
                     </div>
-                    <div className="text-sm text-muted-foreground mb-6">{p.full}</div>
+                    <div className="text-sm text-muted-foreground mb-4">{p.full}</div>
                     <p className="text-foreground/85 leading-relaxed">{p.desc}</p>
                   </div>
                 </div>
