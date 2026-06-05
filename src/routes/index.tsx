@@ -13,6 +13,8 @@ import {
 } from "lucide-react";
 import hero from "@/assets/hero-industrial.jpg";
 import sheets from "@/assets/products-sheets.jpg";
+import jslLogo from "@/assets/jsl-logo.jpeg.asset.json";
+import sailLogo from "@/assets/sail-logo.jpeg.asset.json";
 import pipes from "@/assets/products-pipes.jpg";
 import coils from "@/assets/products-coils.jpg";
 import infra from "@/assets/infrastructure.jpg";
