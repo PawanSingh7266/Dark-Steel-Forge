@@ -59,7 +59,7 @@ export function PageHero({
           className="max-w-3xl"
         >
           <Eyebrow>{eyebrow}</Eyebrow>
-          <h1 className="text-4xl md:text-6xl font-semibold leading-[1.05] text-gradient-steel">
+          <h1 className="text-4xl md:text-6xl font-bold leading-[1.05] text-gradient-steel">
             {title}
           </h1>
           {subtitle && (

@@ -88,7 +88,7 @@ function Home() {
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-[11px] uppercase tracking-[0.25em] text-primary mb-6">
               <Sparkles className="h-3 w-3" /> Legacy Since 1983
             </div>
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold leading-[0.95] tracking-tight">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[0.95] tracking-tight">
               <span className="text-gradient-steel">Forging</span>
               <br />
               <span className="text-foreground">a legacy in</span>

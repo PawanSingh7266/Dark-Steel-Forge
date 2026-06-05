@@ -59,8 +59,8 @@ function Header() {
             <Link
               key={n.to}
               to={n.to}
-              className="px-3 py-2 text-[13px] text-muted-foreground hover:text-foreground transition-colors relative"
-              activeProps={{ className: "px-3 py-2 text-[13px] text-foreground relative" }}
+              className="px-3 py-2 text-[13px] font-medium tracking-wide text-muted-foreground hover:text-foreground transition-colors relative"
+              activeProps={{ className: "px-3 py-2 text-[13px] font-semibold tracking-wide text-foreground relative" }}
               activeOptions={{ exact: n.to === "/" }}
             >
               {n.label}
@@ -97,8 +97,8 @@ function Header() {
                 <Link
                   key={n.to}
                   to={n.to}
-                  className="px-3 py-2.5 text-sm text-muted-foreground hover:text-foreground"
-                  activeProps={{ className: "px-3 py-2.5 text-sm text-foreground" }}
+                  className="px-3 py-2.5 text-sm font-medium tracking-wide text-muted-foreground hover:text-foreground"
+                  activeProps={{ className: "px-3 py-2.5 text-sm font-semibold tracking-wide text-foreground" }}
                   activeOptions={{ exact: n.to === "/" }}
                 >
                   {n.label}
