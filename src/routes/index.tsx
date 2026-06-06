@@ -261,9 +261,9 @@ function Home() {
       {/* WHY */}
       <Section>
         <Container>
-          <FadeIn className="max-w-2xl mb-14">
+          <FadeIn className="max-w-4xl mb-14">
             <Eyebrow>Why Bhandari</Eyebrow>
-            <h2 className="text-4xl md:text-5xl font-semibold">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold md:whitespace-nowrap">
               Precision. Partnership. <span className="text-gradient-steel">Pedigree.</span>
             </h2>
           </FadeIn>
