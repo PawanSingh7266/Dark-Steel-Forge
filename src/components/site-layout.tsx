@@ -209,6 +209,7 @@ export function SiteLayout({ children }: { children: React.ReactNode }) {
         </AnimatePresence>
       </main>
       <Footer />
+      <WhatsAppButton />
     </div>
   );
 }
