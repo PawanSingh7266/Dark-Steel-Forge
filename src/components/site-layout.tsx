@@ -2,6 +2,7 @@ import { Link, useLocation } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Menu, X, ArrowRight, Mail, Phone, MapPin } from "lucide-react";
+import { WhatsAppButton } from "./whatsapp-button";
 import logoUrl from "@/assets/logo.png";
 
 const NAV = [
