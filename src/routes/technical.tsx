@@ -16,60 +16,6 @@ export const Route = createFileRoute("/technical")({
   component: Technical,
 });
 
-const TABS = [
-  {
-    name: "Material Grades",
-    rows: [
-      ["Grade", "UNS", "Type", "Key Properties"],
-      [
-        "SS 304 / 304L",
-        "S30400 / S30403",
-        "Austenitic",
-        "General purpose, excellent corrosion resistance",
-      ],
-      [
-        "SS 316 / 316L",
-        "S31600 / S31603",
-        "Austenitic",
-        "Enhanced corrosion in chloride environments",
-      ],
-      ["SS 321", "S32100", "Austenitic", "Stabilized, high-temperature service"],
-      ["SS 310 / 310S", "S31000", "Austenitic", "High-temperature oxidation resistance"],
-      ["SS 409 / 410", "S40900 / S41000", "Ferritic / Martensitic", "Automotive, structural"],
-      ["SS 904L", "N08904", "Super austenitic", "Aggressive acidic environments"],
-      ["Duplex 2205", "S31803 / S32205", "Duplex", "High strength + corrosion resistance"],
-    ],
-  },
-  {
-    name: "Mechanical Properties",
-    rows: [
-      ["Grade", "Tensile (MPa)", "Yield (MPa)", "Elongation %", "Hardness (HB)"],
-      ["SS 304", "≥ 515", "≥ 205", "≥ 40", "≤ 201"],
-      ["SS 316", "≥ 515", "≥ 205", "≥ 40", "≤ 217"],
-      ["SS 321", "≥ 515", "≥ 205", "≥ 40", "≤ 217"],
-      ["SS 410", "≥ 450", "≥ 205", "≥ 20", "≤ 217"],
-      ["Duplex 2205", "≥ 620", "≥ 450", "≥ 25", "≤ 293"],
-    ],
-  },
-  {
-    name: "Standards",
-    rows: [
-      ["Standard", "Scope"],
-      ["ASTM A240 / A480", "Stainless steel sheets and plates"],
-      ["ASTM A312", "Seamless & welded austenitic stainless pipes"],
-      ["ASTM A269 / A213", "Tubing for general & boiler service"],
-      ["ASTM A276", "Stainless bars and shapes"],
-      ["ASTM A182", "Forged flanges and fittings"],
-      ["ASTM A403", "Wrought stainless buttweld fittings"],
-      ["ASME SA-240 / SA-312", "Pressure vessel & power piping"],
-      ["ANSI B16.5 / B16.9", "Flange & fitting dimensions"],
-    ],
-  },
-  {
-    name: "Chemical Composition",
-    rows: [],
-  },
-];
 
 const CHEM_HEADERS = ["Grade", "C% Max", "Mn%", "P%", "S%", "Si%", "Cr%", "Ni%", "Mo%", "N%", "Others"];
 
