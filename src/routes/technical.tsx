@@ -16,60 +16,6 @@ export const Route = createFileRoute("/technical")({
   component: Technical,
 });
 
-const TABS = [
-  {
-    name: "Material Grades",
-    rows: [
-      ["Grade", "UNS", "Type", "Key Properties"],
-      [
-        "SS 304 / 304L",
-        "S30400 / S30403",
-        "Austenitic",
-        "General purpose, excellent corrosion resistance",
-      ],
-      [
-        "SS 316 / 316L",
-        "S31600 / S31603",
-        "Austenitic",
-        "Enhanced corrosion in chloride environments",
-      ],
-      ["SS 321", "S32100", "Austenitic", "Stabilized, high-temperature service"],
-      ["SS 310 / 310S", "S31000", "Austenitic", "High-temperature oxidation resistance"],
-      ["SS 409 / 410", "S40900 / S41000", "Ferritic / Martensitic", "Automotive, structural"],
-      ["SS 904L", "N08904", "Super austenitic", "Aggressive acidic environments"],
-      ["Duplex 2205", "S31803 / S32205", "Duplex", "High strength + corrosion resistance"],
-    ],
-  },
-  {
-    name: "Mechanical Properties",
-    rows: [
-      ["Grade", "Tensile (MPa)", "Yield (MPa)", "Elongation %", "Hardness (HB)"],
-      ["SS 304", "≥ 515", "≥ 205", "≥ 40", "≤ 201"],
-      ["SS 316", "≥ 515", "≥ 205", "≥ 40", "≤ 217"],
-      ["SS 321", "≥ 515", "≥ 205", "≥ 40", "≤ 217"],
-      ["SS 410", "≥ 450", "≥ 205", "≥ 20", "≤ 217"],
-      ["Duplex 2205", "≥ 620", "≥ 450", "≥ 25", "≤ 293"],
-    ],
-  },
-  {
-    name: "Standards",
-    rows: [
-      ["Standard", "Scope"],
-      ["ASTM A240 / A480", "Stainless steel sheets and plates"],
-      ["ASTM A312", "Seamless & welded austenitic stainless pipes"],
-      ["ASTM A269 / A213", "Tubing for general & boiler service"],
-      ["ASTM A276", "Stainless bars and shapes"],
-      ["ASTM A182", "Forged flanges and fittings"],
-      ["ASTM A403", "Wrought stainless buttweld fittings"],
-      ["ASME SA-240 / SA-312", "Pressure vessel & power piping"],
-      ["ANSI B16.5 / B16.9", "Flange & fitting dimensions"],
-    ],
-  },
-  {
-    name: "Chemical Composition",
-    rows: [],
-  },
-];
 
 const CHEM_HEADERS = ["Grade", "C% Max", "Mn%", "P%", "S%", "Si%", "Cr%", "Ni%", "Mo%", "N%", "Others"];
 
@@ -137,11 +83,8 @@ const FAQS = [
 ];
 
 function Technical() {
-  const [tab, setTab] = useState(0);
   const [open, setOpen] = useState<number | null>(0);
   const [chemQuery, setChemQuery] = useState("");
-  const t = TABS[tab];
-  const isChem = t.name === "Chemical Composition";
 
   return (
     <>
@@ -149,131 +92,84 @@ function Technical() {
         eyebrow="Technical Information"
         title={
           <>
-            Specifications <span className="text-gradient-glow">made simple.</span>
+            Chemical <span className="text-gradient-glow">Composition.</span>
           </>
         }
-        subtitle="Every grade, every standard, every dimension — clearly documented for engineers, fabricators and procurement teams."
+        subtitle="Complete stainless steel grade specifications — clearly documented for engineers, fabricators and procurement teams."
       />
 
       <Section>
         <Container>
-          <div className="flex gap-2 mb-8 flex-wrap">
-            {TABS.map((tb, i) => (
-              <button
-                key={tb.name}
-                onClick={() => setTab(i)}
-                className={`px-5 py-2.5 rounded-full text-sm transition-all ${tab === i ? "bg-gradient-to-r from-[oklch(0.62_0.14_235)] to-[oklch(0.5_0.18_250)] text-white shadow-glow" : "glass text-muted-foreground hover:text-foreground"}`}
-              >
-                {tb.name}
-              </button>
-            ))}
-          </div>
-          {isChem ? (
-            <FadeIn key="chem">
-              <div className="mb-6 max-w-md relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                <input
-                  type="text"
-                  value={chemQuery}
-                  onChange={(e) => setChemQuery(e.target.value)}
-                  placeholder="Search by grade (e.g. 304, 316L, 430)"
-                  className="w-full pl-10 pr-4 py-2.5 rounded-full glass text-sm bg-transparent border border-steel/60 focus:outline-none focus:border-primary"
-                />
-              </div>
-              <div className="space-y-10">
-                {CHEM_TABLES.map((ct) => {
-                  const q = chemQuery.trim().toLowerCase();
-                  const filtered = q
-                    ? ct.rows.filter((r) => r[0].toLowerCase().includes(q))
-                    : ct.rows;
-                  if (q && filtered.length === 0) return null;
-                  return (
-                    <div key={ct.title}>
-                      <h3 className="font-display text-lg md:text-xl font-semibold mb-3 text-foreground/90">
-                        {ct.title}
-                      </h3>
-                      <div className="rounded-2xl glass overflow-hidden">
-                        <div className="overflow-x-auto max-h-[70vh]">
-                          <table className="w-full text-sm min-w-[900px]">
-                            <thead className="sticky top-0 z-10 bg-background/95 backdrop-blur">
-                              <tr className="border-b border-steel">
-                                {CHEM_HEADERS.map((h) => (
-                                  <th
-                                    key={h}
-                                    className="text-left p-3 md:p-4 text-xs uppercase tracking-[0.15em] text-primary font-medium whitespace-nowrap"
-                                  >
-                                    {h}
-                                  </th>
-                                ))}
-                              </tr>
-                            </thead>
-                            <tbody>
-                              {filtered.map((row, i) => (
-                                <tr
-                                  key={i}
-                                  className="border-b border-steel/50 hover:bg-white/[0.02] transition-colors"
-                                >
-                                  {row.map((c, j) => (
-                                    <td
-                                      key={j}
-                                      className={`p-3 md:p-4 text-foreground/85 ${j === 0 ? "font-medium text-foreground whitespace-nowrap" : ""}`}
-                                    >
-                                      {c || "–"}
-                                    </td>
-                                  ))}
-                                </tr>
-                              ))}
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
-                {chemQuery &&
-                  CHEM_TABLES.every(
-                    (ct) => !ct.rows.some((r) => r[0].toLowerCase().includes(chemQuery.trim().toLowerCase())),
-                  ) && (
-                    <p className="text-sm text-muted-foreground">No grades match "{chemQuery}".</p>
-                  )}
-              </div>
-            </FadeIn>
-          ) : (
-          <FadeIn key={tab}>
-            <div className="rounded-2xl glass overflow-hidden">
-              <div className="overflow-x-auto">
-                <table className="w-full text-sm">
-                  <thead>
-                    <tr className="border-b border-steel">
-                      {t.rows[0].map((h) => (
-                        <th
-                          key={h}
-                          className="text-left p-4 md:p-5 text-xs uppercase tracking-[0.18em] text-primary font-medium"
-                        >
-                          {h}
-                        </th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {t.rows.slice(1).map((row, i) => (
-                      <tr
-                        key={i}
-                        className="border-b border-steel/50 hover:bg-white/[0.02] transition-colors"
-                      >
-                        {row.map((c, j) => (
-                          <td key={j} className="p-4 md:p-5 text-foreground/85">
-                            {c}
-                          </td>
-                        ))}
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+          <FadeIn>
+            <div className="mb-8 max-w-md relative">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <input
+                type="text"
+                value={chemQuery}
+                onChange={(e) => setChemQuery(e.target.value)}
+                placeholder="Search by grade (e.g. 304, 316L, 430)"
+                className="w-full pl-10 pr-4 py-2.5 rounded-full glass text-sm bg-transparent border border-steel/60 focus:outline-none focus:border-primary"
+              />
             </div>
           </FadeIn>
-          )}
+
+          <div className="space-y-16">
+            {CHEM_TABLES.map((ct) => {
+              const q = chemQuery.trim().toLowerCase();
+              const filtered = q
+                ? ct.rows.filter((r) => r[0].toLowerCase().includes(q))
+                : ct.rows;
+              if (q && filtered.length === 0) return null;
+              return (
+                <FadeIn key={ct.title}>
+                  <h3 className="font-display text-xl md:text-2xl font-semibold mb-4 text-foreground/90">
+                    {ct.title}
+                  </h3>
+                  <div className="rounded-2xl glass overflow-hidden">
+                    <div className="overflow-x-auto">
+                      <table className="w-full text-sm min-w-[900px]">
+                        <thead className="sticky top-0 z-10 bg-background/95 backdrop-blur">
+                          <tr className="border-b border-steel">
+                            {CHEM_HEADERS.map((h) => (
+                              <th
+                                key={h}
+                                className="text-left p-3 md:p-4 text-xs uppercase tracking-[0.15em] text-primary font-medium whitespace-nowrap"
+                              >
+                                {h}
+                              </th>
+                            ))}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {filtered.map((row, i) => (
+                            <tr
+                              key={i}
+                              className="border-b border-steel/50 hover:bg-white/[0.02] transition-colors"
+                            >
+                              {row.map((c, j) => (
+                                <td
+                                  key={j}
+                                  className={`p-3 md:p-4 text-foreground/85 ${j === 0 ? "font-medium text-foreground whitespace-nowrap" : ""}`}
+                                >
+                                  {c || "–"}
+                                </td>
+                              ))}
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </FadeIn>
+              );
+            })}
+            {chemQuery &&
+              CHEM_TABLES.every(
+                (ct) => !ct.rows.some((r) => r[0].toLowerCase().includes(chemQuery.trim().toLowerCase())),
+              ) && (
+                <p className="text-sm text-muted-foreground">No grades match "{chemQuery}".</p>
+              )}
+          </div>
         </Container>
       </Section>
 
