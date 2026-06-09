@@ -427,6 +427,9 @@ function Home() {
         </Container>
       </Section>
 
+      {/* TESTIMONIALS */}
+      <Testimonials />
+
       {/* CTA */}
       <Section>
         <Container>
