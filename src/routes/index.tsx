@@ -10,7 +10,11 @@ import {
   Sparkles,
   Layers,
   Zap,
+  Star,
+  Quote,
 } from "lucide-react";
+import useEmblaCarousel from "embla-carousel-react";
+import { useCallback, useEffect, useState } from "react";
 import hero from "@/assets/hero-industrial.jpg";
 import sheets from "@/assets/products-sheets.jpg";
 import jslLogo from "@/assets/jsl-logo.jpeg.asset.json";
@@ -62,6 +66,146 @@ const INDUSTRIES = [
   "Heavy Engineering",
   "Automotive",
 ];
+
+const REVIEWS = [
+  {
+    name: "Raja Arun M",
+    rating: 5,
+    text: "Excellent experience with Bhandari Metals & Alloys. Their service has consistently exceeded our expectations. They offer a wide range of high-quality metal products, ensuring reliability and adherence to industry standards. What sets them apart is their commitment to quality, competitive pricing, and prompt delivery. Their team is professional, knowledgeable, and always ready to assist with the right solutions for our project requirements. Every order is handled efficiently, and the materials are delivered on time without compromising quality. Highly recommended for quality products, excellent customer service, and dependable supply solutions.",
+  },
+  {
+    name: "Yazhi Engineering",
+    rating: 5,
+    text: "Outstanding Stainless Steel Trading Company. We have been sourcing stainless steel materials from this company for quite some time, and their service has consistently been exceptional. They offer a wide range of high-quality stainless steel products, including sheets, pipes, coils, rods, and fittings, all meeting industry standards. What sets them apart is their commitment to quality, competitive pricing, and timely delivery. Their team is highly professional, knowledgeable, and always ready to assist in selecting the right materials for specific project requirements. Highly Recommended for Quality Stainless Steel Materials and Professional Service.",
+  },
+  {
+    name: "Ram Ram",
+    rating: 5,
+    text: "The response was very good. Materials were affordable, competitively priced, and delivered on time.",
+  },
+  {
+    name: "Sandhiya G",
+    rating: 5,
+    text: "Professional, trustworthy and efficient. Amazing experience and will definitely return.",
+  },
+  {
+    name: "Sundara Devan",
+    rating: 5,
+    text: "Excellent supplier of steel and alloy products. Good quality materials, competitive pricing, and professional customer service. Delivery was prompt, and the team was helpful throughout the process. Highly recommended.",
+  },
+  {
+    name: "Gughan Kulandaivel",
+    rating: 5,
+    text: "Loved their service. The best part is the material arrived early.",
+  },
+];
+
+function StarRating({ count = 5 }: { count?: number }) {
+  return (
+    <div className="flex items-center gap-0.5">
+      {Array.from({ length: 5 }).map((_, i) => (
+        <Star
+          key={i}
+          className={`h-4 w-4 ${i < count ? "fill-amber-400 text-amber-400" : "text-muted-foreground"}`}
+        />
+      ))}
+    </div>
+  );
+}
+
+function TestimonialCard({ review }: { review: (typeof REVIEWS)[number] }) {
+  return (
+    <div className="h-full p-6 md:p-7 rounded-2xl bg-card border border-border/60 shadow-sm hover:shadow-elegant transition-shadow flex flex-col">
+      <Quote className="h-6 w-6 text-primary/40 mb-4 shrink-0" />
+      <p className="text-sm text-foreground/80 leading-relaxed flex-1">{review.text}</p>
+      <div className="mt-5 pt-5 border-t border-border/60">
+        <div className="font-semibold text-sm">{review.name}</div>
+        <div className="mt-1">
+          <StarRating count={review.rating} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Testimonials() {
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "start" });
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setSelectedIndex(emblaApi.selectedScrollSnap());
+  }, [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    onSelect();
+    emblaApi.on("select", onSelect);
+    return () => {
+      emblaApi.off("select", onSelect);
+    };
+  }, [emblaApi, onSelect]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    const id = setInterval(() => {
+      emblaApi.scrollNext();
+    }, 4000);
+    return () => clearInterval(id);
+  }, [emblaApi]);
+
+  return (
+    <Section>
+      <Container>
+        <FadeIn className="text-center max-w-2xl mx-auto mb-14">
+          <Eyebrow>Testimonials</Eyebrow>
+          <h2 className="text-4xl md:text-5xl font-semibold">
+            Trusted by Customers Across India
+          </h2>
+          <p className="mt-4 text-muted-foreground">
+            See what our clients say about Bhandari Metals & Alloys
+          </p>
+          <div className="mt-4 inline-flex items-center gap-2">
+            <StarRating count={5} />
+            <span className="text-sm font-medium">5.0 / 5</span>
+          </div>
+        </FadeIn>
+
+        {/* Desktop grid */}
+        <div className="hidden md:grid md:grid-cols-3 gap-5">
+          {REVIEWS.map((review, i) => (
+            <FadeIn key={review.name} delay={i * 0.06}>
+              <TestimonialCard review={review} />
+            </FadeIn>
+          ))}
+        </div>
+
+        {/* Mobile carousel */}
+        <div className="md:hidden">
+          <div className="overflow-hidden" ref={emblaRef}>
+            <div className="flex">
+              {REVIEWS.map((review) => (
+                <div key={review.name} className="min-w-0 shrink-0 grow-0 basis-full pl-4 first:pl-0">
+                  <TestimonialCard review={review} />
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="flex justify-center gap-2 mt-5">
+            {REVIEWS.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => emblaApi?.scrollTo(i)}
+                className={`h-2 rounded-full transition-all ${i === selectedIndex ? "w-6 bg-primary" : "w-2 bg-primary/25"}`}
+                aria-label={`Go to slide ${i + 1}`}
+              />
+            ))}
+          </div>
+        </div>
+      </Container>
+    </Section>
+  );
+}
 
 function Home() {
   return (
@@ -422,6 +566,9 @@ function Home() {
           </div>
         </Container>
       </Section>
+
+      {/* TESTIMONIALS */}
+      <Testimonials />
 
       {/* CTA */}
       <Section>
