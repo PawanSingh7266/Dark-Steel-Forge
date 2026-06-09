@@ -10,7 +10,11 @@ import {
   Sparkles,
   Layers,
   Zap,
+  Star,
+  Quote,
 } from "lucide-react";
+import useEmblaCarousel from "embla-carousel-react";
+import { useCallback, useEffect, useState } from "react";
 import hero from "@/assets/hero-industrial.jpg";
 import sheets from "@/assets/products-sheets.jpg";
 import jslLogo from "@/assets/jsl-logo.jpeg.asset.json";
