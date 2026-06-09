@@ -3,6 +3,23 @@ import { PageHero, Section, Container, FadeIn, Eyebrow } from "@/components/sect
 import { ShieldCheck, Award, FileCheck2, Stamp } from "lucide-react";
 import jslLogo from "@/assets/jsl-logo.jpeg.asset.json";
 import sailLogo from "@/assets/sail-logo.jpeg.asset.json";
+import isoCertImg from "@/assets/certs/iso-9001.jpg.asset.json";
+import jslCertImg from "@/assets/certs/jsl-mou.jpg.asset.json";
+import sailCertImg from "@/assets/certs/sail-mou.jpg.asset.json";
+import isoCertPdf from "@/assets/certs/iso-9001.pdf.asset.json";
+import jslCertPdf from "@/assets/certs/jsl-mou.pdf.asset.json";
+import sailCertPdf from "@/assets/certs/sail-mou.pdf.asset.json";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Download, ZoomIn, ZoomOut, Eye } from "lucide-react";
+import { useState } from "react";
 
 export const Route = createFileRoute("/certifications")({
   head: () => ({
@@ -17,6 +34,112 @@ export const Route = createFileRoute("/certifications")({
   }),
   component: Certs,
 });
+
+const NEW_CERTS = [
+  {
+    id: "iso",
+    title: "ISO 9001:2015",
+    subtitle: "Quality Management System",
+    desc: "Independently assessed by QRO and certified compliant with ISO 9001:2015 for trading and supply of stainless steel, copper, brass and aluminium. Certificate No. 305026022098Q, valid until February 2029.",
+    image: isoCertImg.url,
+    pdf: isoCertPdf.url,
+    filename: "ISO-9001-2015-Bhandari-Metals-Alloys.pdf",
+  },
+  {
+    id: "jsl",
+    title: "JSL Authorized Partner",
+    subtitle: "Jindal Stainless Limited — MoU Partnership",
+    desc: "Memorandum of Understanding with Jindal Stainless Limited for dealing in stainless steel products of Jindal Stainless. Issued by JSL Sales & Distribution.",
+    image: jslCertImg.url,
+    pdf: jslCertPdf.url,
+    filename: "JSL-MoU-Partnership-Certificate.pdf",
+  },
+  {
+    id: "sail",
+    title: "SAIL Authorized Partner",
+    subtitle: "Steel Authority of India Limited — MoU Partnership",
+    desc: "Memorandum of Understanding with Steel Authority of India Limited for purchase of stainless steel from SAIL Salem Steel Plant. Signed by SAIL leadership.",
+    image: sailCertImg.url,
+    pdf: sailCertPdf.url,
+    filename: "SAIL-MoU-Partnership-Certificate.pdf",
+  },
+];
+
+function CertificateCard({ cert }: { cert: (typeof NEW_CERTS)[number] }) {
+  const [zoom, setZoom] = useState(1);
+  return (
+    <div className="group relative h-full overflow-hidden rounded-3xl border border-border/60 bg-card shadow-sm hover:shadow-xl hover:-translate-y-0.5 transition-all flex flex-col">
+      <div className="absolute -inset-px rounded-3xl bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-60 pointer-events-none" />
+      <div className="relative bg-white border-b border-border/50 aspect-[3/4] overflow-hidden flex items-center justify-center">
+        <img
+          src={cert.image}
+          alt={`${cert.title} certificate`}
+          loading="lazy"
+          className="w-full h-full object-contain p-4 transition-transform duration-500 group-hover:scale-[1.02]"
+        />
+      </div>
+      <div className="relative p-6 md:p-7 flex flex-col flex-1">
+        <div className="flex items-center gap-2 text-primary text-xs uppercase tracking-[0.25em] mb-3">
+          <Stamp className="h-4 w-4" /> Certified
+        </div>
+        <h3 className="font-display text-xl md:text-2xl font-bold text-foreground mb-1">
+          {cert.title}
+        </h3>
+        <div className="text-sm text-muted-foreground mb-3">{cert.subtitle}</div>
+        <p className="text-foreground/85 leading-relaxed text-sm flex-1">{cert.desc}</p>
+        <Dialog onOpenChange={() => setZoom(1)}>
+          <DialogTrigger asChild>
+            <Button className="mt-5 w-full" variant="default">
+              <Eye className="h-4 w-4" /> View Certificate
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="max-w-5xl w-[95vw] h-[90vh] p-0 flex flex-col">
+            <DialogHeader className="p-4 border-b">
+              <DialogTitle>{cert.title}</DialogTitle>
+              <DialogDescription>{cert.subtitle}</DialogDescription>
+            </DialogHeader>
+            <div className="flex items-center justify-between gap-2 p-3 border-b bg-muted/30">
+              <div className="flex items-center gap-2">
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={() => setZoom((z) => Math.max(0.5, z - 0.25))}
+                >
+                  <ZoomOut className="h-4 w-4" /> Zoom Out
+                </Button>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={() => setZoom((z) => Math.min(4, z + 0.25))}
+                >
+                  <ZoomIn className="h-4 w-4" /> Zoom In
+                </Button>
+                <span className="text-xs text-muted-foreground ml-2">
+                  {Math.round(zoom * 100)}%
+                </span>
+              </div>
+              <Button size="sm" asChild>
+                <a href={cert.pdf} download={cert.filename} target="_blank" rel="noreferrer">
+                  <Download className="h-4 w-4" /> Download PDF
+                </a>
+              </Button>
+            </div>
+            <div className="flex-1 overflow-auto bg-muted/20 p-4">
+              <div className="flex items-start justify-center min-h-full">
+                <img
+                  src={cert.image}
+                  alt={`${cert.title} full certificate`}
+                  style={{ transform: `scale(${zoom})`, transformOrigin: "top center" }}
+                  className="transition-transform duration-200 max-w-full shadow-lg bg-white"
+                />
+              </div>
+            </div>
+          </DialogContent>
+        </Dialog>
+      </div>
+    </div>
+  );
+}
 
 function Certs() {
   return (
@@ -33,6 +156,20 @@ function Certs() {
 
       <Section>
         <Container>
+          <FadeIn className="max-w-2xl mb-12">
+            <Eyebrow>Official Certificates</Eyebrow>
+            <h2 className="text-4xl md:text-5xl font-semibold">
+              Verified credentials, <span className="text-gradient-glow">on record.</span>
+            </h2>
+          </FadeIn>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+            {NEW_CERTS.map((c, i) => (
+              <FadeIn key={c.id} delay={i * 0.08}>
+                <CertificateCard cert={c} />
+              </FadeIn>
+            ))}
+          </div>
+
           <div className="grid md:grid-cols-2 gap-6">
             {[
               {
