@@ -11,6 +11,7 @@ import {
   Wrench,
   Car,
   Cog,
+  TrainFront,
 } from "lucide-react";
 import oilGas from "@/assets/industries/oil-gas.jpg";
 import petrochemicals from "@/assets/industries/petrochemicals.jpg";
@@ -22,6 +23,7 @@ import construction from "@/assets/industries/construction.jpg";
 import heavyEngineering from "@/assets/industries/heavy-engineering.jpg";
 import automotive from "@/assets/industries/automotive.jpg";
 import manufacturing from "@/assets/industries/manufacturing.jpg";
+import railways from "@/assets/industries/railways.jpg";
 
 export const Route = createFileRoute("/industries")({
   head: () => ({
@@ -97,6 +99,12 @@ const IND = [
     name: "Manufacturing",
     desc: "OEMs and downstream processors across general industry.",
     image: manufacturing,
+  },
+  {
+    icon: TrainFront,
+    name: "Railways",
+    desc: "Stainless steel sheets, plates, coils, pipes, fittings and engineered materials for railway infrastructure, rolling stock, coaches and stations.",
+    image: railways,
   },
 ];
 
