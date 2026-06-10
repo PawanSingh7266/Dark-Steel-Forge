@@ -3,9 +3,6 @@ import { PageHero, Section, Container, FadeIn, Eyebrow } from "@/components/sect
 import { ShieldCheck, Award, FileCheck2, Stamp } from "lucide-react";
 import jslLogo from "@/assets/jsl-logo.jpeg.asset.json";
 import sailLogo from "@/assets/sail-logo.jpeg.asset.json";
-import isoCertPdf from "@/assets/certs/iso-9001.pdf.asset.json";
-import jslCertPdf from "@/assets/certs/jsl-mou.pdf.asset.json";
-import sailCertPdf from "@/assets/certs/sail-mou.pdf.asset.json";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -14,8 +11,9 @@ import {
   DialogTitle,
   DialogDescription,
   DialogTrigger,
+  DialogClose,
 } from "@/components/ui/dialog";
-import { Download, ZoomIn, ZoomOut, Eye } from "lucide-react";
+import { ZoomIn, ZoomOut, Eye, X } from "lucide-react";
 import { useState } from "react";
 
 export const Route = createFileRoute("/certifications")({
@@ -39,8 +37,6 @@ const NEW_CERTS = [
     subtitle: "Quality Management System",
     desc: "Independently assessed by QRO and certified compliant with ISO 9001:2015 for trading and supply of stainless steel, copper, brass and aluminium. Certificate No. 305026022098Q, valid until February 2029.",
     image: "/certificates/iso-9001.jpg",
-    pdf: isoCertPdf.url,
-    filename: "ISO-9001-2015-Bhandari-Metals-Alloys.pdf",
   },
   {
     id: "jsl",
@@ -48,8 +44,6 @@ const NEW_CERTS = [
     subtitle: "Jindal Stainless Limited — MoU Partnership",
     desc: "Memorandum of Understanding with Jindal Stainless Limited for dealing in stainless steel products of Jindal Stainless. Issued by JSL Sales & Distribution.",
     image: "/certificates/jsl-authorized-partner.jpg",
-    pdf: jslCertPdf.url,
-    filename: "JSL-MoU-Partnership-Certificate.pdf",
   },
   {
     id: "sail",
@@ -57,8 +51,6 @@ const NEW_CERTS = [
     subtitle: "Steel Authority of India Limited — MoU Partnership",
     desc: "Memorandum of Understanding with Steel Authority of India Limited for purchase of stainless steel from SAIL Salem Steel Plant. Signed by SAIL leadership.",
     image: "/certificates/sail-authorized-partner.jpg",
-    pdf: sailCertPdf.url,
-    filename: "SAIL-MoU-Partnership-Certificate.pdf",
   },
 ];
 
