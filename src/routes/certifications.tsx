@@ -91,42 +91,47 @@ function CertificateCard({ cert }: { cert: (typeof NEW_CERTS)[number] }) {
           </DialogTrigger>
           <DialogContent className="max-w-5xl w-[95vw] h-[90vh] p-0 flex flex-col">
             <DialogHeader className="p-4 border-b">
-              <DialogTitle>{cert.title}</DialogTitle>
-              <DialogDescription>{cert.subtitle}</DialogDescription>
-            </DialogHeader>
-            <div className="flex items-center justify-between gap-2 p-3 border-b bg-muted/30">
-              <div className="flex items-center gap-2">
-                <Button
-                  size="sm"
-                  variant="outline"
-                  onClick={() => setZoom((z) => Math.max(0.5, z - 0.25))}
-                >
-                  <ZoomOut className="h-4 w-4" /> Zoom Out
-                </Button>
-                <Button
-                  size="sm"
-                  variant="outline"
-                  onClick={() => setZoom((z) => Math.min(4, z + 0.25))}
-                >
-                  <ZoomIn className="h-4 w-4" /> Zoom In
-                </Button>
-                <span className="text-xs text-muted-foreground ml-2">
-                  {Math.round(zoom * 100)}%
-                </span>
+              <div className="flex items-center justify-between">
+                <div>
+                  <DialogTitle>{cert.title}</DialogTitle>
+                  <DialogDescription>{cert.subtitle}</DialogDescription>
+                </div>
+                <DialogClose asChild>
+                  <Button size="sm" variant="ghost" className="h-8 w-8 p-0">
+                    <X className="h-4 w-4" />
+                    <span className="sr-only">Close</span>
+                  </Button>
+                </DialogClose>
               </div>
-              <Button size="sm" asChild>
-                <a href={cert.pdf} download={cert.filename} target="_blank" rel="noreferrer">
-                  <Download className="h-4 w-4" /> Download PDF
-                </a>
+            </DialogHeader>
+            <div className="flex items-center gap-2 p-3 border-b bg-muted/30">
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={() => setZoom((z) => Math.max(0.5, z - 0.25))}
+              >
+                <ZoomOut className="h-4 w-4" /> Zoom Out
               </Button>
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={() => setZoom((z) => Math.min(4, z + 0.25))}
+              >
+                <ZoomIn className="h-4 w-4" /> Zoom In
+              </Button>
+              <span className="text-xs text-muted-foreground ml-2">
+                {Math.round(zoom * 100)}%
+              </span>
             </div>
             <div className="flex-1 overflow-auto bg-muted/20 p-4">
               <div className="flex items-start justify-center min-h-full">
                 <img
                   src={cert.image}
                   alt={`${cert.title} full certificate`}
+                  draggable={false}
+                  onContextMenu={(e) => e.preventDefault()}
                   style={{ transform: `scale(${zoom})`, transformOrigin: "top center" }}
-                  className="transition-transform duration-200 max-w-full shadow-lg bg-white"
+                  className="transition-transform duration-200 max-w-full shadow-lg bg-white select-none"
                 />
               </div>
             </div>
