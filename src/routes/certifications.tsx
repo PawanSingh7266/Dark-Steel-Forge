@@ -3,9 +3,6 @@ import { PageHero, Section, Container, FadeIn, Eyebrow } from "@/components/sect
 import { ShieldCheck, Award, FileCheck2, Stamp } from "lucide-react";
 import jslLogo from "@/assets/jsl-logo.jpeg.asset.json";
 import sailLogo from "@/assets/sail-logo.jpeg.asset.json";
-import isoCertImg from "@/assets/certs/iso-9001.jpg.asset.json";
-import jslCertImg from "@/assets/certs/jsl-mou.jpg.asset.json";
-import sailCertImg from "@/assets/certs/sail-mou.jpg.asset.json";
 import isoCertPdf from "@/assets/certs/iso-9001.pdf.asset.json";
 import jslCertPdf from "@/assets/certs/jsl-mou.pdf.asset.json";
 import sailCertPdf from "@/assets/certs/sail-mou.pdf.asset.json";
@@ -41,7 +38,7 @@ const NEW_CERTS = [
     title: "ISO 9001:2015",
     subtitle: "Quality Management System",
     desc: "Independently assessed by QRO and certified compliant with ISO 9001:2015 for trading and supply of stainless steel, copper, brass and aluminium. Certificate No. 305026022098Q, valid until February 2029.",
-    image: isoCertImg.url,
+    image: "/certificates/iso-9001.jpg",
     pdf: isoCertPdf.url,
     filename: "ISO-9001-2015-Bhandari-Metals-Alloys.pdf",
   },
@@ -50,7 +47,7 @@ const NEW_CERTS = [
     title: "JSL Authorized Partner",
     subtitle: "Jindal Stainless Limited — MoU Partnership",
     desc: "Memorandum of Understanding with Jindal Stainless Limited for dealing in stainless steel products of Jindal Stainless. Issued by JSL Sales & Distribution.",
-    image: jslCertImg.url,
+    image: "/certificates/jsl-authorized-partner.jpg",
     pdf: jslCertPdf.url,
     filename: "JSL-MoU-Partnership-Certificate.pdf",
   },
@@ -59,7 +56,7 @@ const NEW_CERTS = [
     title: "SAIL Authorized Partner",
     subtitle: "Steel Authority of India Limited — MoU Partnership",
     desc: "Memorandum of Understanding with Steel Authority of India Limited for purchase of stainless steel from SAIL Salem Steel Plant. Signed by SAIL leadership.",
-    image: sailCertImg.url,
+    image: "/certificates/sail-authorized-partner.jpg",
     pdf: sailCertPdf.url,
     filename: "SAIL-MoU-Partnership-Certificate.pdf",
   },
@@ -75,7 +72,14 @@ function CertificateCard({ cert }: { cert: (typeof NEW_CERTS)[number] }) {
           src={cert.image}
           alt={`${cert.title} certificate`}
           loading="lazy"
-          className="w-full h-full object-contain p-4 transition-transform duration-500 group-hover:scale-[1.02]"
+          onError={(e) => {
+            const img = e.currentTarget;
+            if (!img.dataset.fallback) {
+              img.dataset.fallback = "1";
+              img.src = "/placeholder.svg";
+            }
+          }}
+          className="w-full h-full object-contain p-4 transition-transform duration-500 group-hover:scale-105"
         />
       </div>
       <div className="relative p-6 md:p-7 flex flex-col flex-1">
