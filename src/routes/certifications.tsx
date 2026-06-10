@@ -64,6 +64,8 @@ function CertificateCard({ cert }: { cert: (typeof NEW_CERTS)[number] }) {
           src={cert.image}
           alt={`${cert.title} certificate`}
           loading="lazy"
+          draggable={false}
+          onContextMenu={(e) => e.preventDefault()}
           onError={(e) => {
             const img = e.currentTarget;
             if (!img.dataset.fallback) {
@@ -71,7 +73,7 @@ function CertificateCard({ cert }: { cert: (typeof NEW_CERTS)[number] }) {
               img.src = "/placeholder.svg";
             }
           }}
-          className="w-full h-full object-contain p-4 transition-transform duration-500 group-hover:scale-105"
+          className="w-full h-full object-contain p-4 transition-transform duration-500 group-hover:scale-105 select-none"
         />
       </div>
       <div className="relative p-6 md:p-7 flex flex-col flex-1">
