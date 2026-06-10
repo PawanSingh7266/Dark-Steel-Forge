@@ -3,9 +3,6 @@ import { PageHero, Section, Container, FadeIn, Eyebrow } from "@/components/sect
 import { ShieldCheck, Award, FileCheck2, Stamp } from "lucide-react";
 import jslLogo from "@/assets/jsl-logo.jpeg.asset.json";
 import sailLogo from "@/assets/sail-logo.jpeg.asset.json";
-import isoCertPdf from "@/assets/certs/iso-9001.pdf.asset.json";
-import jslCertPdf from "@/assets/certs/jsl-mou.pdf.asset.json";
-import sailCertPdf from "@/assets/certs/sail-mou.pdf.asset.json";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -14,8 +11,9 @@ import {
   DialogTitle,
   DialogDescription,
   DialogTrigger,
+  DialogClose,
 } from "@/components/ui/dialog";
-import { Download, ZoomIn, ZoomOut, Eye } from "lucide-react";
+import { ZoomIn, ZoomOut, Eye, X } from "lucide-react";
 import { useState } from "react";
 
 export const Route = createFileRoute("/certifications")({
@@ -39,8 +37,6 @@ const NEW_CERTS = [
     subtitle: "Quality Management System",
     desc: "Independently assessed by QRO and certified compliant with ISO 9001:2015 for trading and supply of stainless steel, copper, brass and aluminium. Certificate No. 305026022098Q, valid until February 2029.",
     image: "/certificates/iso-9001.jpg",
-    pdf: isoCertPdf.url,
-    filename: "ISO-9001-2015-Bhandari-Metals-Alloys.pdf",
   },
   {
     id: "jsl",
@@ -48,8 +44,6 @@ const NEW_CERTS = [
     subtitle: "Jindal Stainless Limited — MoU Partnership",
     desc: "Memorandum of Understanding with Jindal Stainless Limited for dealing in stainless steel products of Jindal Stainless. Issued by JSL Sales & Distribution.",
     image: "/certificates/jsl-authorized-partner.jpg",
-    pdf: jslCertPdf.url,
-    filename: "JSL-MoU-Partnership-Certificate.pdf",
   },
   {
     id: "sail",
@@ -57,8 +51,6 @@ const NEW_CERTS = [
     subtitle: "Steel Authority of India Limited — MoU Partnership",
     desc: "Memorandum of Understanding with Steel Authority of India Limited for purchase of stainless steel from SAIL Salem Steel Plant. Signed by SAIL leadership.",
     image: "/certificates/sail-authorized-partner.jpg",
-    pdf: sailCertPdf.url,
-    filename: "SAIL-MoU-Partnership-Certificate.pdf",
   },
 ];
 
@@ -72,6 +64,8 @@ function CertificateCard({ cert }: { cert: (typeof NEW_CERTS)[number] }) {
           src={cert.image}
           alt={`${cert.title} certificate`}
           loading="lazy"
+          draggable={false}
+          onContextMenu={(e) => e.preventDefault()}
           onError={(e) => {
             const img = e.currentTarget;
             if (!img.dataset.fallback) {
@@ -79,7 +73,7 @@ function CertificateCard({ cert }: { cert: (typeof NEW_CERTS)[number] }) {
               img.src = "/placeholder.svg";
             }
           }}
-          className="w-full h-full object-contain p-4 transition-transform duration-500 group-hover:scale-105"
+          className="w-full h-full object-contain p-4 transition-transform duration-500 group-hover:scale-105 select-none"
         />
       </div>
       <div className="relative p-6 md:p-7 flex flex-col flex-1">
@@ -99,42 +93,47 @@ function CertificateCard({ cert }: { cert: (typeof NEW_CERTS)[number] }) {
           </DialogTrigger>
           <DialogContent className="max-w-5xl w-[95vw] h-[90vh] p-0 flex flex-col">
             <DialogHeader className="p-4 border-b">
-              <DialogTitle>{cert.title}</DialogTitle>
-              <DialogDescription>{cert.subtitle}</DialogDescription>
-            </DialogHeader>
-            <div className="flex items-center justify-between gap-2 p-3 border-b bg-muted/30">
-              <div className="flex items-center gap-2">
-                <Button
-                  size="sm"
-                  variant="outline"
-                  onClick={() => setZoom((z) => Math.max(0.5, z - 0.25))}
-                >
-                  <ZoomOut className="h-4 w-4" /> Zoom Out
-                </Button>
-                <Button
-                  size="sm"
-                  variant="outline"
-                  onClick={() => setZoom((z) => Math.min(4, z + 0.25))}
-                >
-                  <ZoomIn className="h-4 w-4" /> Zoom In
-                </Button>
-                <span className="text-xs text-muted-foreground ml-2">
-                  {Math.round(zoom * 100)}%
-                </span>
+              <div className="flex items-center justify-between">
+                <div>
+                  <DialogTitle>{cert.title}</DialogTitle>
+                  <DialogDescription>{cert.subtitle}</DialogDescription>
+                </div>
+                <DialogClose asChild>
+                  <Button size="sm" variant="ghost" className="h-8 w-8 p-0">
+                    <X className="h-4 w-4" />
+                    <span className="sr-only">Close</span>
+                  </Button>
+                </DialogClose>
               </div>
-              <Button size="sm" asChild>
-                <a href={cert.pdf} download={cert.filename} target="_blank" rel="noreferrer">
-                  <Download className="h-4 w-4" /> Download PDF
-                </a>
+            </DialogHeader>
+            <div className="flex items-center gap-2 p-3 border-b bg-muted/30">
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={() => setZoom((z) => Math.max(0.5, z - 0.25))}
+              >
+                <ZoomOut className="h-4 w-4" /> Zoom Out
               </Button>
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={() => setZoom((z) => Math.min(4, z + 0.25))}
+              >
+                <ZoomIn className="h-4 w-4" /> Zoom In
+              </Button>
+              <span className="text-xs text-muted-foreground ml-2">
+                {Math.round(zoom * 100)}%
+              </span>
             </div>
             <div className="flex-1 overflow-auto bg-muted/20 p-4">
               <div className="flex items-start justify-center min-h-full">
                 <img
                   src={cert.image}
                   alt={`${cert.title} full certificate`}
+                  draggable={false}
+                  onContextMenu={(e) => e.preventDefault()}
                   style={{ transform: `scale(${zoom})`, transformOrigin: "top center" }}
-                  className="transition-transform duration-200 max-w-full shadow-lg bg-white"
+                  className="transition-transform duration-200 max-w-full shadow-lg bg-white select-none"
                 />
               </div>
             </div>
