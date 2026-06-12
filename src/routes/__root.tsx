@@ -107,6 +107,28 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap",
       },
     ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "LocalBusiness",
+          name: "Bhandari Metals & Alloys",
+          image: "/og-image.png",
+          telephone: "+91 72008 22500",
+          email: "sales.bma@gmail.com",
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: "95, Manikkam Pillai Street, Periyar Nagar, Mannurpet",
+            addressLocality: "Chennai",
+            addressRegion: "Tamil Nadu",
+            postalCode: "600058",
+            addressCountry: "IN",
+          },
+          openingHours: "Mo-Sa 10:00-19:00",
+        }),
+      },
+    ],
   }),
   shellComponent: RootShell,
   component: RootComponent,

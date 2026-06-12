@@ -154,7 +154,10 @@ function Footer() {
           <ul className="space-y-2.5 text-sm text-foreground/80">
             <li className="flex items-start gap-2">
               <MapPin className="h-4 w-4 mt-0.5 text-primary shrink-0" />
-              <span>95 Manickkam Pillai Street, Mannurpet, Chennai – 600050</span>
+              <span>
+                95, Manikkam Pillai Street, Periyar Nagar, Mannurpet, Chennai, Tamil Nadu 600058,
+                India
+              </span>
             </li>
             <li className="flex items-center gap-2">
               <Phone className="h-4 w-4 text-primary" />
