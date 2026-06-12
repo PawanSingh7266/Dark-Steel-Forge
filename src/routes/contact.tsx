@@ -48,7 +48,7 @@ function Contact() {
                     icon: MapPin,
                     t: "Office",
                     d: "95, Manikkam Pillai Street, Periyar Nagar, Mannurpet, Chennai, Tamil Nadu 600058, India",
-                    href: "https://www.google.com/maps?q=452C%2BG66+Manikkam+Pillai+St+Periyar+Nagar+Mannurpet+Chennai+Tamil+Nadu+600058",
+                    href: "https://www.google.com/maps/search/?api=1&query=Bhandari+Metals+%26+Alloys+452C%2BG66+Manikkam+Pillai+St+Periyar+Nagar+Mannurpet+Chennai+Tamil+Nadu+600058",
                   },
                   { icon: Phone, t: "Phone", d: "+91 72008 22500", href: "tel:+917200822500" },
                   { icon: Phone, t: "Phone", d: "+91 98841 18783", href: "tel:+919884118783" },
@@ -140,7 +140,7 @@ function Contact() {
             <div className="rounded-2xl overflow-hidden glass aspect-[16/7]">
               <iframe
                 title="Map"
-                src="https://www.google.com/maps?q=452C%2BG66+Manikkam+Pillai+St+Periyar+Nagar+Mannurpet+Chennai+Tamil+Nadu+600058&output=embed"
+                src="https://www.google.com/maps?q=Bhandari+Metals+%26+Alloys%2C+452C%2BG66%2C+Manikkam+Pillai+St%2C+Periyar+Nagar%2C+Mannurpet%2C+Chennai%2C+Tamil+Nadu+600058&output=embed"
                 width="100%"
                 height="100%"
                 style={{
