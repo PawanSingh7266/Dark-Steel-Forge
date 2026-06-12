@@ -16,6 +16,11 @@ const NAV = [
   { to: "/contact", label: "Contact" },
 ] as const;
 
+const ADDRESS =
+  "95, Manikkam Pillai Street, Periyar Nagar, Mannurpet, Chennai, Tamil Nadu 600058, India";
+const MAPS_URL =
+  "https://www.google.com/maps/search/?api=1&query=Bhandari+Metals+%26+Alloys+452C%2BG66+Manikkam+Pillai+St+Periyar+Nagar+Mannurpet+Chennai+Tamil+Nadu+600058";
+
 function Logo({ size = "default" }: { size?: "default" | "lg" }) {
   const h = size === "lg" ? "h-14" : "h-[42px] md:h-[55px]";
   return (
@@ -53,6 +58,27 @@ function Header() {
     <header
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${scrolled ? "glass-strong" : "bg-transparent"}`}
     >
+      <div className="hidden md:block border-b border-steel/60 bg-[oklch(0.2_0.04_250/0.55)]">
+        <div className="max-w-7xl mx-auto px-5 lg:px-8 h-8 flex items-center justify-between gap-4 text-[11px] text-muted-foreground">
+          <a
+            href={MAPS_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 hover:text-foreground transition-colors truncate"
+          >
+            <MapPin className="h-3 w-3 text-primary shrink-0" />
+            <span className="truncate">{ADDRESS}</span>
+          </a>
+          <div className="flex items-center gap-4 shrink-0">
+            <a href="tel:+917200822500" className="flex items-center gap-1.5 hover:text-foreground transition-colors">
+              <Phone className="h-3 w-3 text-primary" /> +91 72008 22500
+            </a>
+            <a href="mailto:sales.bma@gmail.com" className="hidden lg:flex items-center gap-1.5 hover:text-foreground transition-colors">
+              <Mail className="h-3 w-3 text-primary" /> sales.bma@gmail.com
+            </a>
+          </div>
+        </div>
+      </div>
       <div className="max-w-7xl mx-auto px-5 lg:px-8 h-20 flex items-center justify-between">
         <Logo />
         <nav className="hidden lg:flex items-center gap-1">
@@ -105,6 +131,20 @@ function Header() {
                   {n.label}
                 </Link>
               ))}
+              <div className="mt-2 pt-3 border-t border-steel space-y-2.5 px-3 pb-2 text-xs text-muted-foreground">
+                <a
+                  href={MAPS_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-start gap-2 hover:text-foreground transition-colors"
+                >
+                  <MapPin className="h-3.5 w-3.5 mt-0.5 text-primary shrink-0" />
+                  <span>{ADDRESS}</span>
+                </a>
+                <a href="tel:+917200822500" className="flex items-center gap-2 hover:text-foreground transition-colors">
+                  <Phone className="h-3.5 w-3.5 text-primary" /> +91 72008 22500
+                </a>
+              </div>
             </div>
           </motion.div>
         )}
@@ -198,7 +238,7 @@ export function SiteLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      <main className="flex-1 pt-20">
+      <main className="flex-1 pt-20 md:pt-28">
         <AnimatePresence mode="wait">
           <motion.div
             key={loc.pathname}
