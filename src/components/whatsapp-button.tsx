@@ -4,7 +4,7 @@ export function WhatsAppButton() {
   const [showTooltip, setShowTooltip] = useState(false);
 
   const message = encodeURIComponent(
-    "Hello Bhandari Metals & Alloys,\nI would like to enquire about your stainless steel products."
+    "Hello Bhandari Metals & Alloys, I would like to enquire about your stainless steel products."
   );
   const href = `https://wa.me/917200822500?text=${message}`;
 
