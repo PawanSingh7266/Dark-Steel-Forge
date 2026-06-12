@@ -50,20 +50,20 @@ function Contact() {
                     d: "95 Manickkam Pillai Street, Mannurpet, Chennai – 600050",
                     href: "https://www.google.com/maps?q=95+Manickkam+Pillai+Street+Mannurpet+Chennai+600050",
                   },
-                  { icon: Phone, t: "Phone", d: "+91 98840 50538", href: "tel:+919884050538" },
+                  { icon: Phone, t: "Phone", d: "+91 72008 22500", href: "tel:+917200822500" },
                   { icon: Phone, t: "Phone", d: "+91 98841 18783", href: "tel:+919884118783" },
                   {
                     icon: Mail,
                     t: "Email",
-                    d: "info@bhandarimetalloys.com",
-                    href: "mailto:info@bhandarimetalloys.com",
+                    d: "sales.bma@gmail.com",
+                    href: "mailto:sales.bma@gmail.com",
                   },
                   { icon: Clock, t: "Business Hours", d: "Mon – Sat · 10:00 AM – 7:00 PM" },
                   {
                     icon: MessageCircle,
                     t: "WhatsApp",
-                    d: "Quick response on +91 98840 50538",
-                    href: "https://wa.me/919884050538",
+                    d: "Quick response on +91 72008 22500",
+                    href: "https://wa.me/917200822500",
                   },
                 ].map((c) => (
                   <div key={c.t} className="p-5 rounded-xl glass flex items-start gap-4">
