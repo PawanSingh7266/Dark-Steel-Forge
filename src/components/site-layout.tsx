@@ -158,8 +158,8 @@ function Footer() {
             </li>
             <li className="flex items-center gap-2">
               <Phone className="h-4 w-4 text-primary" />
-              <a href="tel:+919884050538" className="hover:text-primary transition-colors">
-                +91 98840 50538
+              <a href="tel:+917200822500" className="hover:text-primary transition-colors">
+                +91 72008 22500
               </a>
             </li>
             <li className="flex items-center gap-2">
@@ -171,10 +171,10 @@ function Footer() {
             <li className="flex items-center gap-2">
               <Mail className="h-4 w-4 text-primary" />
               <a
-                href="mailto:info@bhandarimetalloys.com"
+                href="mailto:sales.bma@gmail.com"
                 className="hover:text-primary transition-colors"
               >
-                info@bhandarimetalloys.com
+                sales.bma@gmail.com
               </a>
             </li>
           </ul>
